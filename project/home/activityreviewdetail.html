@@ -1,0 +1,55 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>活动回顾详情</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../../css/mui.min.css" rel="stylesheet" />
+		<style type="text/css">
+			#questioncontent img{
+				max-width: 100%;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div class="mui-content">
+			<div id="questioncontent" style="font-size: 12px;color: #272727;"></div>
+		</div>
+		<script src="../../js/lib/jquery.min.js"></script>
+		<script src="../../js/lib/mui.min.js"></script>
+		<script src="../../js/common/utils.js"></script>
+		<script src="../../js/lib/template.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../js/require.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../../js/default.config.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+            document.write('<script src="../../js/common/base.utils.js?v=' + Math.random() + '" type="text/javascript" charset="utf-8">' + '<' + '/script>');
+            document.write('<script src="../../js/common/request.js?v=' + Math.random() + '" type="text/javascript" charset="utf-8">' + '<' + '/script>');
+        </script>
+		<script type="text/javascript">
+			mui.init()
+
+//			mui.plusReady(function() {
+			$(function() {
+			    require(['session'], function(session) {
+			        var web = getQueryString();
+                    showLoading();
+                    bjpost('/History/read.html', {
+                        token: session.token(),
+                        id:web.id
+                    }, function(activitys) {
+                        if(activitys){
+                            $('#questioncontent').html(activitys.content);
+                        }
+                        hideLoading();
+                    }, function(error) {
+                        hideLoading();
+                        mui.toast(error);
+                    })
+                })
+			})
+		</script>
+	</body>
+
+</html>

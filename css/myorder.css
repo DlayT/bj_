@@ -1,0 +1,43 @@
+.mui-slider .mui-segmented-control.mui-segmented-control-inverted~.mui-slider-group .mui-slider-item {
+    border-top: 0px solid #c8c7cc;
+    border-bottom: 1px solid #c8c7cc;
+}
+
+.mui-segmented-control.mui-segmented-control-inverted .mui-control-item.mui-active {
+    color: #FC1500;
+}
+
+.mui-segmented-control.mui-segmented-control-inverted~.mui-slider-progress-bar {
+    background-color: #FC1500;
+}
+
+.mui-table-view .mui-media-object {
+    line-height: 98px;
+    max-width: 98px;
+    height: 98px;
+}
+
+/*去掉分割线*/
+.mui-table-view:after{
+	height: 0px;
+}
+
+.mui-table-view:before{
+	height: 0px;
+}
+
+.mui-table-view-cell:after {
+	left: 0px;
+}
+
+.mui-slider-indicator,.mui-segmented-control,.mui-segmented-control-inverted{
+	background-color: white;
+/*	height: 44px;
+*/}
+.mui-segmented-control .mui-control-item {
+    line-height: 44px;
+}
+
+.mui-fullscreen .mui-segmented-control~.mui-slider-group {
+    top: 56px;
+}

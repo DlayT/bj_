@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link rel="stylesheet" type="text/css" href="../../css/mui.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/iconfont.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/base.app.css" />
+		<link rel="stylesheet" type="text/css" href="../../font/mui.ttf" />
+		<style type="text/css">
+			a {
+				text-decoration: none;
+				color: #FFFFFF;
+			}
+			
+			.mui-icon.mui-pull-left.mui-action-back {
+				font-size: 16px;
+				line-height: 44px;
+				padding-top: 1px;
+				padding-bottom: 0px;
+				padding-left: 15px;
+				color: white;
+			}
+		</style>
+	</head>
+
+	<body style="background: #009BFD">
+		<!--<header class="mui-bar mui-bar-nav app-navbar-config" style="height: 64px;">
+			<div class="app-status-config"></div>
+			<div>
+				<h1 id="title" class="mui-title">详情</h1>
+				<a class="mui-icon mui-icon-left-nav mui-pull-left" id="go_back"></a>
+				<div class="mui-icon  mui-pull-left mui-action-back" id="close_page"> 关闭
+				</div>
+			</div>
+		</header>-->
+	</body>
+
+	<!--脚本文件改变 尽量放在底部 异步加载的问题-->
+
+	<script src="../../js/lib/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../../js/lib/mui.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../../js/common/utils.min.js" type="text/javascript" charset="utf-8"></script>
+	
+		<script type="text/javascript">
+			document.write('<script src="../../js/common/base.utils.js?v=' + Math.random() + '" type="text/javascript" charset="utf-8">' + '<' + '/script>');
+			document.write('<script src="../../js/common/request.js?v=' + Math.random() + '" type="text/javascript" charset="utf-8">' + '<' + '/script>');
+	</script>
+		
+	<!--模板-->
+	<script type="text/javascript">
+		mui.init();
+		mui.plusReady(function() {
+			plus.navigator.setStatusBarBackground("#009BFD");
+			var self = plus.webview.currentWebview();
+			plus.webview.create()
+			var baiduWV = plus.webview.create('cmb_webview.html', "webdetail", {
+				top: '20px',
+				bottom:'0px',
+				scalable: false,
+				titleNView: {
+					titleText: self.title, // 标题栏文字,当不设置此属性时，默认加载当前页面的标题，并自动更新页面的标题
+					titleColor: "#ffffff", // 字体颜色,颜色值格式为"#RRGGBB",默认值为"#000000"
+					titleSize: "17px", // 字体大小,默认17px
+					backgroundColor: "#009BFD", // 控件背景颜色,颜色值格式为"#RRGGBB",默认值为"#F7F7F7"
+					progress: { //进度条
+						color: '#FF0000',
+						height: '1px'
+					},
+					buttons: [{ //后退按钮
+						float: 'left',
+						fontSize: '24px',
+						color: '#ffffff',
+						onclick: go_back,
+						fontSrc: '_www/fonts/mui.ttf',
+						text: '\ue471'
+						//							onclick: _self.back.bind(_self) //指定函数的上下文为browser，否则是当前这个对象；
+					}, { //关闭按钮
+						color: '#ffffff',
+						'float': 'left',
+						onclick: close_web,
+						text: '关闭',
+						fontSize: '16px',
+						//						fontWeight:'bold'
+					}]
+				}
+			}, {
+				actionUrl: self.actionUrl,
+				payJson: self.payJson
+			});
+			
+			//https://www.bjoverrideurl.com/?type='1'&targert='product'&param='jsonstr'
+
+			baiduWV.overrideUrlLoading({
+				mode: 'reject',
+				match: '.*bjoverrideurl\.com/.*',
+			}, function(event) {
+				var obj = Bee.UrlUtils.urlToObj(event.url);
+				wflog(event);
+				wflog(obj);
+				onjsCallHtml(obj)
+			})
+
+			self.append(baiduWV);
+
+			function go_back() {
+				baiduWV.canBack(function(event) {
+					var canBack = event.canBack;
+					if(canBack) {
+						baiduWV.back();
+					} else {
+						mui.back();
+						//alert("到头了，不能后退了！");
+					}
+				});
+			}
+
+			function close_web() {
+				mui.back();
+			}
+		});
+	</script>
+	
+	<script type="text/javascript">
+		function onjsCallHtml (obj) {
+			if (obj.type == 1) {//原生
+				if (obj.target == 'cmbpay') {
+					pushToWebController('pay.result.success.html','支付成功');
+				}
+			}else{//网页
+				
+			}
+		}
+	</script>
+
+</html>

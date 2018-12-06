@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta charset="utf-8">
+		<title>我的资料</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1, user-scalable=no;" />
+		<link rel="stylesheet" type="text/css" href="../../css/mui.min.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/base.app.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/user.personal.css" />
+		<style type="text/css">
+			.mui-bar {
+				background-color: #009BFD;
+			}
+			
+			.mui-title {
+				color: #fff;
+			}
+			
+			.mui-icon-back:before,
+			.mui-icon,
+			.mui-icon-left-nav:before {
+				color: #fff;
+			}
+			
+			.a-upload {
+				position: relative;
+				cursor: pointer;
+				width: 100%;
+				overflow: hidden;
+				display: block;
+				float: left;
+				*display: inline;
+				*zoom: 1
+			}
+			
+			.a-upload input {
+				position: absolute;
+				right: 0;
+				top: 0;
+				opacity: 0;
+				filter: alpha(opacity=0);
+				cursor: pointer;
+				width: 100%;
+				height: 100%;
+			}
+		</style>
+
+		<script src="../../js/lib/jquery.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../js/lib/mui.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../js/require.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../js/default.config.js" type="text/javascript" charset="utf-8"></script>
+
+		<script type="text/javascript">
+			document.write('<script src="../../js/common/base.utils.js?v=' + Math.random() + '" type="text/javascript" charset="utf-8">' + '<' + '/script>');
+			document.write('<script src="../../js/common/request.js?v=' + Math.random() + '" type="text/javascript" charset="utf-8">' + '<' + '/script>');
+			document.write('<script src="../../js/app/user/user.personal.js?v=' + Math.random() + '" type="text/javascript" charset="utf-8">' + '<' + '/script>');
+		</script>
+	</head>
+
+	<body>
+		<!--<header class="mui-bar mui-bar-nav" style="height: 64px;">
+            <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" style="margin-top: 20px;"></a>
+            <h1 class="mui-title " style="margin-top: 20px;">我的资料</h1>
+            <a id="saveBtn" class="mui-icon mui-pull-right" style="font-size: 16px;padding-top: 15px;margin-top: 21px;">保存</a>
+        </header>-->
+		<div class="mui-content mui-hidden" style="margin-top: 12px;">
+			<ul class="mui-table-view">
+				<li id="header" class="mui-table-view-cell app-vertical-center person-header-row">
+					<div class="mui-navigate-right">头像</div>
+					<a href="#picture" style="width:30%;">
+						<img id="avator" src="../../img/head_default.png" class="mui-pull-right person-header-icon" />
+					</a>
+				</li>
+				<li id="username-li" class="mui-table-view-cell ">
+					<div class="mui-navigate-right  personal-right-info">姓名<span id="username" class="mui-pull-right"></span></div>
+				</li>
+				<li id='sex' class="mui-table-view-cell">
+					<div class="mui-navigate-right  personal-right-info">性别<span id="usersex" class="mui-pull-right">男</span></div>
+				</li>
+				<li id="usernickname-li" class="mui-table-view-cell">
+					<div class="mui-navigate-right  personal-right-info">昵称<span id="usernickname" class="mui-pull-right">林哥</span></div>
+				</li>
+				<li id="userphone-li" class="mui-table-view-cell">
+					<div class="mui-navigate-right  personal-right-info">手机号码<span id="userphone" class="mui-pull-right">15973145642</span></div>
+				</li>
+				<li id="userbinder-li" class="mui-table-view-cell">
+					<div class="mui-navigate-right  personal-right-info">我的绑定<span id="userBinderCell" class="mui-pull-right"></span></div>
+				</li>
+			</ul>
+
+			<div class="app-seperate-view"></div>
+			<!--退出登录-->
+
+			<div class="app-tabbar-view">
+				<button id="logoutBtn" type="button" class="mui-btn mui-btn-red  btn-person-logout" onclick="logout()">退出登录</button>
+			</div>
+
+			<div id="version" class="app-footer-graybar" style="texvt-align: center;font-size: 14px;">
+				v1.2.1.beta
+			</div>
+
+			<div id="sexPicker" class="mui-popover mui-popover-action mui-popover-bottom">
+				<ul class="mui-table-view">
+					<li class="mui-table-view-cell">
+						<a href="#">男</a>
+					</li>
+					<li class="mui-table-view-cell">
+						<a href="#">女</a>
+					</li>
+				</ul>
+				<ul class="mui-table-view">
+					<li class="mui-table-view-cell">
+						<a href="#sexPicker"><b>取消</b></a>
+					</li>
+				</ul>
+			</div>
+		</div>
+
+		<div id="picture" class="mui-popover mui-popover-action mui-popover-bottom">
+			<ul class="mui-table-view">
+				<li class="mui-table-view-cell">
+					<a class="a-upload" href="#">拍照
+						<input type="file" accept="image/*" capture="camera">
+					</a>
+				</li>
+				<li class="mui-table-view-cell">
+					<a class="a-upload" href="#">从手机相册选择
+						<input  type="file" accept="image/*">
+					</a>
+				</li>
+			</ul>
+			<ul class="mui-table-view">
+				<li class="mui-table-view-cell">
+					<a href="#picture"><b>取消</b></a>
+				</li>
+			</ul>
+		</div>
+	</body>
+
+</html>

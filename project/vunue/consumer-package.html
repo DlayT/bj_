@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link rel="stylesheet" type="text/css" href="../../css/mui.min.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/base.app.css" />
+
+		<style type="text/css">
+			.buyBtn {
+				width: 78px;
+				height: 24px;
+				background-color: red;
+				text-align: center;
+				border-radius: 5px;
+			}
+			
+			.mui-table-view-cell:after {
+				position: absolute;
+				right: 0;
+				bottom: 0;
+				left: 0px;
+				height: 15px;
+				content: '';
+				-webkit-transform: scaleY(.5);
+				transform: scaleY(.5);
+				background-color: #F1F1F1;
+			}
+			
+			.summary {
+				display: flex;
+				flex-direction: row;
+				-webkit-flex-direction: row;
+				align-items: center;
+				-webkit-align-items: center;
+				justify-content: space-between;
+				-webkit-justify-content: space-between;
+				margin-top: 11px;
+			}
+			
+			.prepare {
+				display: flex;
+				flex-direction: row;
+				-webkit-flex-direction: row;
+				align-items: center;
+				-webkit-align-items: center;
+				justify-content: space-between;
+				-webkit-justify-content: space-between;
+				margin-top: 18px;
+				margin-bottom: 7px;
+			}
+			
+			.mui-popover {
+				border-radius: 0px;
+				transition: opacity .3s;
+				transition-property: opacity;
+				transition-duration: 0.5s;
+				transition-timing-function: initial;
+				transition-delay: initial;
+			}
+			
+			.popover-summary span {
+				font-size: 12px;
+				color: #000000;
+				margin-left: 15px;
+			}
+			
+			.popover-summary div {
+				font-size: 12px;
+				color: #000000;
+				margin-left: 15px;
+			}
+			
+			.popover-title {
+				width: 100%;
+				height: 44px;
+				line-height: 44px;
+				text-align: center;
+				margin-left: 15px;
+				font-size: 16px;
+				color: #262626;
+			}
+			
+			.popover-bottom-prepare {
+				width: 100%;
+				height: 49px;
+				background-color: #009BFD;
+				font-size: 18px;
+				color: white;
+				text-align: center;
+				line-height: 49px;
+				margin: 15px 0px 0px 0px;
+			}
+		</style>
+
+	</head>
+
+	<body>
+		<div class="mui-content">
+			<div style="height: 10px;width: 100%;background-color: #F1F1F1;"></div>
+			<div id="packagelist">
+
+			</div>
+
+			<div class="app-footer-bluebar rightnow-footer-bar">
+				直接预约
+			</div>
+
+			<div id="bottomPopover" class="mui-fullscreen" style="width: 100%;background-color: rgba(0,0,0,0.2);display: none;">
+
+			</div>
+		</div>
+
+	</body>
+	<script src="../../js/lib/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../../js/lib/mui.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../../js/lib/template.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../../js/common/utils.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../../js/common/he.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../../js/require.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../../js/default.config.js" type="text/javascript" charset="utf-8"></script>
+
+	<script type="text/javascript">
+		document.write('<script src="../../js/common/base.utils.js?v=' + Math.random() + '" type="text/javascript" charset="utf-8">' + '<' + '/script>');
+		document.write('<script src="../../js/common/request.js?v=' + Math.random() + '" type="text/javascript" charset="utf-8">' + '<' + '/script>');
+		document.write('<script src="../../js/app/venue/consumer-package.js?v=' + Math.random() + '" type="text/javascript" charset="utf-8">' + '<' + '/script>');
+	</script>
+
+	<script type="text/html" id="tmp_package">
+		<ul class="mui-table-view">
+			<!--暂时不需要三把火-->
+			{{each result v i}}{{if i == -1}}
+			<li class="mui-table-view-cell" style="position:relative;overflow: initial;" id="{{i}}">
+				<div style="display: flex;flex-direction: column;">
+					<span style="font-size: 15px;color: #262626;">{{v.package_name}}</span>
+					<div class="summary">
+						<span style="flex: 1;font-size: 13px;color: #262626;">提前预约、入园保障、如实描述</span>
+						<div style="margin-left: 16px;">
+							<span style="font-size: 16px;color: red;">￥{{v.price}}</span>
+							<span style="font-size: 12px;color: #808080;flex: 1;text-decoration: line-through;">￥{{v.original_price}}</span>
+						</div>
+					</div>
+					<div class="prepare">
+						<span style="font-size: 12px;color: #262626;">购买须知>></span>
+						<div class="buyBtn">
+							<span style="font-size: 14px;color: white;line-height: 24px;">免费预约</span>
+						</div>
+					</div>
+				</div>
+				<div class="hot" style="position: absolute;top: -17px;left:20px;">
+					<img style="width: 20px;display: inline-block;" src="../../img/icon_hot.png" />
+					<img style="width: 20px;display: inline-block;" src="../../img/icon_hot.png" />
+					<img style="width: 20px;display: inline-block;" src="../../img/icon_hot.png" />
+				</div>
+			</li>
+			{{else}}
+			<li class="mui-table-view-cell" id="{{i}}">
+				<div style="display: flex;flex-direction: column;">
+					<span style="font-size: 15px;color: #262626;">{{v.package_name}}</span>
+					<div class="summary">
+						<span style="flex: 1;font-size: 13px;color: #262626;">提前预约、入园保障、如实描述</span>
+						<div style="margin-left: 16px;">
+							<span style="font-size: 16px;color: red;">￥{{v.price}}</span>
+							<span style="font-size: 12px;color: #808080;flex: 1;text-decoration: line-through;">￥{{v.original_price}}</span>
+						</div>
+					</div>
+					<div class="prepare">
+						<span style="font-size: 12px;color: #262626;">购买须知>></span>
+						<div class="buyBtn">
+							<span style="font-size: 14px;color: white;line-height: 24px;">免费预约</span>
+						</div>
+					</div>
+				</div>
+			</li>
+			{{/if}} {{/each}}
+		</ul>
+	</script>
+
+	<script type="text/html" id="tmp_popover">
+		{{set bj_package = result}}
+		<div class="package-content">
+			<div style="overflow: scroll;max-height: 400px;min-height:200px;padding-bottom: 49px;position: absolute;bottom: 0;width: 100%;background: white;padding: 5px 5px;">
+				{{bj_package.content}}
+			</div>
+			<div class="app-footer-bluebar package-footer-bar" id={{bj_package.index}} style="margin-top: 10px;">免费预约</div>
+		</div>
+	</script>
+
+</html>

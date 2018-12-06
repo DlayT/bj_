@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>特价抢购</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link rel="stylesheet" type="text/css" href="../../css/mui.min.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/base.app.css" />
+
+		<style type="text/css">
+			.top-warning {
+				font-size: 12px;
+				color: #FFFFFF;
+				margin-left: 8px;
+			}
+			
+			.title-box {
+				display: flex;
+				flex-direction: row;
+				height: 40px;
+				align-items: center;
+			}
+			
+			.home-header-lefticon {
+				width: 17px;
+				height: 19px;
+				margin-right: 11px;
+			}
+			
+			.line {
+				width: 100%;
+				height: 15px;
+				background-color: #F1F1F1;
+			}
+			
+			.panicbuying-content {
+				display: flex;
+				flex-direction: column;
+				padding: 8px;
+			}
+			
+			.price-box {
+				display: flex;
+				flex-direction: row;
+				align-items: center;
+			}
+			
+			.buyBtn {
+				width: 78px;
+				height: 25px;
+				background-color: red;
+				text-align: center;
+				border-radius: 5px;
+			}
+		</style>
+
+		<script src="../../js/lib/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../js/lib/mui.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../js/lib/template.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../js/require.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../js/default.config.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../js/common/utils.min.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			document.write('<script src="../../js/common/base.utils.js?v=' + Math.random() + '" type="text/javascript" charset="utf-8">' + '<' + '/script>');
+			document.write('<script src="../../js/common/request.js?v=' + Math.random() + '" type="text/javascript" charset="utf-8">' + '<' + '/script>');
+			document.write('<script src="../../js/app/home/panicbuying.js?v=' + Math.random() + '" type="text/javascript" charset="utf-8">' + '<' + '/script>');
+		</script>
+	</head>
+
+	<body>
+		<div class="mui-content">
+			<div style="display:flex; flex-direction: row;align-items: center; width: 100%;height: 25px;background-color: #000000;">
+				<span class="top-warning">提示：所有的抢购商品不能退款</span>
+			</div>
+			<div id="panicbuyingview" class="panicbuying">
+				<ul class="mui-table-view"></ul>
+			</div>
+
+		</div>
+	</body>
+	<script type="text/html" id="tmp_panicbuyinglist">
+		{{each result v i}}
+		<li style="display: block;padding: 0px;" class="mui-table-view-cell mui-media" id="{{v}}">
+			<div class="line"></div>
+			<div class="title-box">
+				<img style="width: 15px;height: 19px; margin-left: 15px;" class="mui-media-object mui-pull-left" src="../../img/icon_panicbuying.png" />
+				<span style="font-size: 16px;color: red;">特价抢购</span>
+			</div>
+			<div class="panicbuying-content">
+				<img class="activity-content-img" onerror="onerror=null;src='../../img/activity_example.png'" src={{v.imgpath}} />
+				<div style="margin-top: 10px;">
+					<span style="color: red;">【特价抢购】</span>
+					<span>{{v.title}}</span>
+				</div>
+				<div style="width:100%; height: 1px; background-color: #E6E6E6;margin: 5px;"></div>
+				<div class="price-box">
+					<span style="font-size: 16px;color: red;">￥{{v.price}}元</span>
+					<span style="margin-left: 20px;font-size: 12px;color: #808080;flex: 1;text-decoration: line-through;">门市价：￥{{v.goods_price}}</span>
+					<div class="buyBtn">
+						<span style="font-size: 16px;color: white;line-height: 25px;">去抢购</span>
+					</div>
+				</div>
+			</div>
+			<div class="line"></div>
+		</li>
+		{{/each}}
+	</script>
+
+</html>

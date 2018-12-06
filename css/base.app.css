@@ -1,0 +1,348 @@
+/*状态栏背景颜色*/
+
+
+/*tableview 默认顶部的距离为0px  mui 默认是15px*/
+
+.mui-content>.mui-table-view:first-child {
+	margin-top: 0px;
+}
+
+.mui-table-view:after {
+	height: 0px;
+}
+
+.mui-table-view:before {
+	height: 0px;
+}
+
+.mui-popover-action .mui-table-view-cell {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 44px;
+	text-align: center;
+}
+
+
+/*IE不支持*/
+
+.mui-popover.mui-popover-action .mui-table-view:nth-child(1) {
+	margin: 0;
+}
+
+.mui-popover.mui-popover-action .mui-table-view {
+	margin: 10px 0px 0px 0px;
+	/* text-align: center; */
+	color: #000000;
+	border-radius: 0px;
+}
+
+.mui-popover.mui-popover-action.mui-popover-bottom {
+	background: #E8E8E8;
+}
+
+.mui-table-view-cell>a:not(.mui-btn).mui-active {
+	background-color: #f7f7f7;
+}
+
+.mui-table-view-cell>a:not(.mui-btn) {
+	width: 100%;
+}
+
+
+/*导航标题字体大小*/
+
+.mui-bar .mui-title {
+	font-size: 18px;
+}
+
+.mui-title {
+	font-size: 17px;
+	font-weight: 500;
+	line-height: 44px;
+	position: absolute;
+	display: block;
+	width: 100%;
+	margin: 0 -10px;
+	padding: 0;
+	text-align: center;
+	white-space: nowrap;
+	color: #FFFFFF;
+}
+
+
+/*导航条背景颜色*/
+
+.app-footer-bluebar {
+	position: fixed;
+	bottom: 0px;
+	height: 49px;
+	width: 100%;
+	background-color: #009BFD;
+	color: white;
+	font-size: 18px;
+	line-height: 49px;
+	text-align: center;
+}
+
+.app-footer-graybar {
+	position: fixed;
+	bottom: 0px;
+	height: 49px;
+	width: 100%;
+	background-color: #F5F6F8;
+	color: #999999;
+	font-size: 18px;
+	line-height: 49px;
+	text-align: center;
+}
+
+.app-footer-whitebar {
+	position: fixed;
+	bottom: 0px;
+	height: 49px;
+	width: 100%;
+	background-color: white;
+	color: #999999;
+	font-size: 18px;
+	line-height: 49px;
+	text-align: center;
+}
+
+.app-navbar-bgcolor {
+	/*background-color: #ff5601;*/
+	background-color: #009BFD;
+}
+
+.app-navbar-config {
+	background-color: #009BFD;
+}
+
+.app-status-config {
+	height: 20px;
+	background-color: #009BFD;
+}
+
+.mui-icon-back:before,
+.mui-icon-left-nav:before {
+	color: white;
+}
+
+
+/*tabbar 高亮的颜色*/
+
+.mui-bar-tab .mui-tab-item.mui-active {
+	color: #009BFD;
+}
+
+
+/*正常的颜色*/
+
+.mui-bar-tab .mui-tab-item {
+	color: #808080;
+}
+
+
+/*默认content背景颜色*/
+
+.mui-content {
+	background-color: white;
+}
+
+.mui-table-view-cell.mui-active {
+	background-color: white;
+}
+
+
+/*基础背景颜色*/
+
+.app-base-bgcolor {
+	background-color: white;
+}
+
+
+/*基础灰色背景颜色 比如分组的界面*/
+
+.app-basegray-bgcolor {
+	background-color: #F5F6F8;
+}
+
+.app-seperate-view {
+	background-color: #F5F6F8;
+	width: 100%;
+	height: 12px;
+}
+
+.app-line-separate-view {
+	width: 100%;
+	height: .5px;
+	background-color: #c8c7cc;
+}
+
+.app-tabbar-view {
+	display: flex;
+	display: -webkit-flex;
+	justify-content: center;
+	-webkit-justify-content: center;
+	-webkit-align-items: center;
+	background-color: #F5F6F8;
+	width: 100%;
+	height: 50px;
+}
+
+
+/*placehold*/
+
+.app-base-placehold {
+	background-color: #999999;
+}
+
+
+/*tabbar 正常*/
+
+.app-tabbar-normal {
+	background-color: #B0B0B0;
+}
+
+.app-vertical-center {
+	display: flex;
+	display: -webkit-flex;
+	align-items: center;
+	-webkit-align-items: center;
+}
+
+.app-view-center {
+	display: flex;
+	display: -webkit-flex;
+	align-items: center;
+	-webkit-align-items: center;
+	justify-content: center;
+	-webkit-justify-content: center;
+}
+
+.app-view-empty {
+	width: 100px;
+	height: 80px;
+}
+
+
+/*tabbar高亮*/
+
+.app-tabbar-highlight {
+	background-color: #4289FF;
+}
+
+.app-header-view {
+	height: 44px;
+}
+
+.mui-btn-blue {
+	background-color: #009BFD;
+	border: #009BFD solid 1px;
+}
+
+
+/*好神奇*/
+
+img {
+	max-width: 100%;
+}
+
+nav {
+	max-width: 100%;
+}
+
+div {
+	/*	background-color: white;
+*/
+	max-width: 100%;
+}
+
+
+/*初始化  body的属性，每个浏览器像素margin都不一样*/
+
+body {
+	display: block;
+	margin: 0px;
+	background: #F5F6F8;
+}
+
+.mui-navigate-right:after,
+.mui-push-right:after {
+	right: 8px;
+	content: '\e583';
+}
+
+
+/*下拉刷新  上啦加载的样式*/
+
+.mui-pull-top-tips {
+	position: absolute;
+	top: -20px;
+	left: 50%;
+	margin-left: -25px;
+	width: 40px;
+	height: 40px;
+	border-radius: 100%;
+	z-index: 1;
+}
+
+.mui-bar~.mui-pull-top-tips {
+	top: 24px;
+}
+
+.mui-pull-top-wrapper {
+	width: 42px;
+	height: 42px;
+	display: block;
+	text-align: center;
+	background-color: #efeff4;
+	border: 1px solid #ddd;
+	border-radius: 25px;
+	background-clip: padding-box;
+	box-shadow: 0 4px 10px #bbb;
+	overflow: hidden;
+}
+
+.mui-pull-top-tips.mui-transitioning {
+	-webkit-transition-duration: 200ms;
+	transition-duration: 200ms;
+}
+
+.mui-pull-top-tips .mui-pull-loading {
+	margin: 0;
+}
+
+.mui-pull-top-wrapper .mui-icon,
+.mui-pull-top-wrapper .mui-spinner {
+	margin-top: 7px;
+}
+
+.mui-pull-bottom-tips {
+	text-align: center;
+	background-color: #efeff4;
+	font-size: 15px;
+	line-height: 40px;
+	color: #777;
+}
+
+.mui-pull-top-canvas {
+	overflow: hidden;
+	background-color: #fafafa;
+	border-radius: 40px;
+	box-shadow: 0 4px 10px #bbb;
+	width: 40px;
+	height: 40px;
+	margin: 0 auto;
+}
+
+.mui-pull-top-canvas canvas {
+	width: 40px;
+}
+
+/*body{
+	font-size: 14px;
+}*/
+
+
+/*下拉刷新  上啦加载的样式*/

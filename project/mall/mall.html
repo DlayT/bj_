@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link rel="stylesheet" type="text/css" href="../../css/mui.min.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/iconfont.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/base.app.css" />
+		<script src="../../js/lib/jquery.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../js/lib/mui.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../js/common/base.utils.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../js/common/request.js" type="text/javascript" charset="utf-8"></script>
+
+		<script src="../../js/require.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../js/default.config.js" type="text/javascript" charset="utf-8"></script>
+
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+
+	<body style="background: navajowhite;">
+		<div class="mui-content">
+			<button id="wxpay" type="button" class="mui-btn mui-btn-green mui-btn-block" onclick="pay_failure()">支付成功</button>
+			<button id="wxpay" type="button" class="mui-btn mui-btn-green mui-btn-block" onclick="pay_success()">支付失败</button>
+			<button id="wxpay" type="button" class="mui-btn mui-btn-green mui-btn-block" onclick="robot()">智能机器人</button>
+
+			<button id="wxpay" type="button" class="mui-btn mui-btn-green mui-btn-block" onclick="native_bar()">原生跳转</button>
+
+			<button id="wxpay" type="button" class="mui-btn mui-btn-green mui-btn-block" onclick="wxpay()">微信支付</button>
+
+			<button id="alipay" type="button" class="mui-btn mui-btn-purple mui-btn-block" onclick="alipay()">支付宝</button>
+
+			<button id="order" type="button" class="mui-btn mui-btn-purple mui-btn-block" onclick="toLoginPage()">登录页面</button>
+
+			<button id="address" type="button" class="mui-btn mui-btn-purple mui-btn-block" onclick="toAddress()">收货地址</button>
+
+			<button id="cardDetail" type="button" class="mui-btn mui-btn-purple mui-btn-block" onclick="toCardDetail()">年卡详情</button>
+
+			<button id="bindcard" type="button" class="mui-btn mui-btn-purple mui-btn-block" onclick="toBindCard()">绑定卡</button>
+
+			<button id="login" type="button" class="mui-btn mui-btn-purple mui-btn-block" onclick="login()">登录</button>
+
+			<button id="wfwxpay" type="button" class="mui-btn mui-btn-purple mui-btn-block" onclick="wfwxpay()">公司支付</button>
+
+			<button id="wfwxpay" type="button" class="mui-btn mui-btn-purple mui-btn-block" onclick="showmap()">导航</button>
+		</div>
+	</body>
+
+	<script type="text/javascript">
+		function pay_failure () {
+			pushToWebController('../app/pay.result.success.html', '支付成功');
+		}
+		
+		function pay_success () {
+			pushToWebController('../app/pay.result.failure.html', '支付失败');
+		}
+		
+		function robot() {
+			pushToWebController('../guest/guest.ai.html', '智能客服')
+		}
+
+		function native_bar() {
+			//打开窗口的相关参数
+			var options = {
+				styles: {
+					popGesture: "close",
+					titleNView: {
+
+					}
+				},
+				extras: {}
+			};
+			options.styles.titleNView.type = "transparent";
+			mui.openWindow('transparent.html', 'transparent', options)
+		}
+
+		function login() {
+			require(['session'], function(session) {
+				var param;
+				if(mui.os.plus) {
+					if(mui.os.ios) {
+						param = {
+							'name': '15973145642',
+							'password': '123456'
+						};
+					} else {
+						param = {
+							'name': '18570301575',
+							'password': '654321'
+						};
+					}
+
+				} else {
+					param = {
+						'name': '15973145642',
+						'password': '123456'
+					};
+				}
+				bjpost('/User/login.html', param, function(responseData) {
+					session.handleLoginSuccess(responseData);
+					wflog(session.token() + responseData.token);
+					//					wflog('a' + JSON.stringify(session.sharedInstance()));
+					mui.toast('登陆成功');
+				})
+			});
+		}
+	</script>
+	<!--微信支付代码-->
+	<script type="text/javascript">
+		var pays = {};
+		//113.019497,28.200614
+
+		url = 'iosamap://navi?sourceApplication=wenvip&backScheme=wenvip&lat=' + '28.1936336542' + '&lon=' + '113.0110788345' + '&dev=0&style=2';
+		//		var f = iosAppstore;
+		var id = "itunes.apple.com/cn/app/gao-tu-zhuan-ye-dao-hang-ban/id461703208?mt=8";
+
+		function showmap() {
+			plus.geolocation.getCurrentPosition(function(position) {
+				var codns = position.coords;
+				var lat = codns.latitude; //获取到当前位置的纬度；
+				var longt = codns.longitude; //获取到当前位置的经度
+				var ptObj1 = new plus.maps.Point(longt, lat);
+				var ptObj2 = new plus.maps.Point(113.0110788345, 28.1936336542);
+
+				//高德          https://ask.dcloud.net.cn/article/12885
+				plus.runtime.openURL(url, function(e) {
+					plus.nativeUI.confirm("检查到您未安装\"高德地图\"，是否到商城搜索下载？", function(i) {
+
+					});
+				}, id);
+
+				//系统自带的导航				
+				//				plus.maps.openSysMap(ptObj2, "火车站", ptObj1);
+			}, function(e) {
+				outSet("获取位置信息失败：" + e.message);
+			}, {
+				geocode: false
+			});
+		}
+
+		mui.plusReady(function() {
+			plus.payment.getChannels(function(channels) {
+				for(var i = 0; i < channels.length; i++) {
+					var channel = channels[i];
+					pays[channel.id] = channel;
+				}
+			});
+		})
+
+		// 检测是否安装支付服务
+		//如果是支付宝永远返回true 因为没有安装支付宝的app 可以直接跳转wap支付
+		//如果是微信支付如果没有安装则返回false 提示安装微信
+		function checkServices(pc) {
+			if(!pc.serviceReady) {
+				var txt = null;
+				switch(pc.id) {
+					case 'alipay':
+						txt = '检测到系统未安装“支付宝快捷支付服务”，无法完成支付操作，是否立即安装？';
+						break;
+					default:
+						txt = '系统未安装“' + pc.description + '”服务，无法完成支付，是否立即安装？';
+						break;
+				}
+				plus.nativeUI.confirm(txt, function(e) {
+					if(e.index == 0) {
+						pc.installService(); //安装对应的app 例如微信
+					}
+				}, pc.description);
+			}
+		}
+
+		var w = null;
+		var PAYSERVER = 'http://demo.dcloud.net.cn/payment/?payid=';
+
+		function createOrder() {
+			require(['session'], function(session) {
+				var param = {
+					'token': session.token(),
+					'cardId': 1,
+					'payment': 1
+				};
+
+				wflog(param);
+
+				bjpost('/Card/cardOrderAdd.html', param, function(responseData) {
+					wflog(responseData);
+				}, function(error) {
+					console.log(error)
+					mui.toast(error);
+				});
+			})
+		}
+
+		function wfwxpay() {
+			//			createOrder()
+			require(['session'], function(session) {
+				var param = {
+					'token': session.token(),
+					'orderSn': '20180426221558101',
+					'payment': '1'
+				};
+				bjpost('/Order/orderPay.html', param, function(responseData) {
+					plus.payment.request(pays['wxpay'], responseData, function(result) {
+						wflog(result);
+					}, function(e) {
+						wflog(e);
+					});
+				})
+			})
+		}
+
+		function wxpay() {
+			//			console.log('微信支付');
+			if(w) {
+				return;
+			} //检查
+
+			var url = PAYSERVER;
+			url += 'wxpay';
+
+			//需要配置
+			var appid = plus.runtime.appid;
+
+			url += '&appid=' + appid + '&total=1';
+			console.log('url' + '=' + url);
+
+			w = plus.nativeUI.showWaiting();
+
+			var xhr = new XMLHttpRequest();
+			xhr.onreadystatechange = function(event) {
+				wflog(event);
+				if(xhr.readyState == 4) {
+					w.close();
+					w = null;
+					if(xhr.status == 200) {
+						console.log(xhr.responseText);
+						//注意这里是
+						plus.payment.request(pays['wxpay'], xhr.responseText, function(result) {
+							wflog(result);
+						}, function(e) {
+							wflog(e);
+							wflog('----- 支付失败 -----' + '[' + e.code + ']：' + e.message);
+						});
+					}
+				}
+			}
+
+			xhr.onread
+			xhr.open('GET', url + url);
+			xhr.send();
+		}
+
+		function alipay() {
+			//			console.log('支付');
+			if(w) {
+				return;
+			} //检查
+
+			var url = PAYSERVER;
+			url += 'alipay';
+
+			//需要配置
+			var appid = plus.runtime.appid;
+
+			url += '&appid=' + appid + '&total=1';
+			console.log('url' + '=' + url);
+
+			w = plus.nativeUI.showWaiting();
+
+			var xhr = new XMLHttpRequest();
+			xhr.onreadystatechange = function(event) {
+				wflog(event);
+				if(xhr.readyState == 4) {
+					w.close();
+					w = null;
+					if(xhr.status == 200) {
+						wflog(xhr.responseText);
+						plus.payment.request(pays['alipay'], xhr.responseText, function(result) {
+							wflog(result);
+						}, function(e) {
+							wflog(e);
+							wflog('----- 支付失败 -----' + '[' + e.code + ']：' + e.message);
+						});
+					}
+				}
+			}
+
+			xhr.onread
+			xhr.open('GET', url + url);
+			xhr.send();
+		}
+
+		function toLoginPage() {
+			pushToWebController('../login/login.html', '登录');
+		}
+
+		function toAddress() {
+			mui.openWindow({
+				url: '../address/address.html',
+				id: 'address.html'
+			})
+		}
+
+		function toCardDetail() {
+			mui.openWindow({
+				url: '../card/carddetail.html',
+				id: 'carddetail.html',
+				styles: { // 窗口参数 参考5+规范中的WebviewStyle,也就是说WebviewStyle下的参数都可以在此设置
+					titleNView: { // 窗口的标题栏控件
+						autoBackButton: true,
+						titleText: '查看明细', // 标题栏文字,当不设置此属性时，默认加载当前页面的标题，并自动更新页面的标题
+						titleColor: "#ffffff", // 字体颜色,颜色值格式为"#RRGGBB",默认值为"#000000"
+						titleSize: "17px", // 字体大小,默认17px
+						backgroundColor: "#009BFD", // 控件背景颜色,颜色值格式为"#RRGGBB",默认值为"#F7F7F7"
+					}
+				}
+			});
+		}
+
+		function toBindCard() {
+			mui.openWindow({
+				url: '../card/bindcard.html',
+				id: 'bindcard.html',
+				styles: { // 窗口参数 参考5+规范中的WebviewStyle,也就是说WebviewStyle下的参数都可以在此设置
+					titleNView: { // 窗口的标题栏控件
+						autoBackButton: true,
+						titleText: '绑定卡', // 标题栏文字,当不设置此属性时，默认加载当前页面的标题，并自动更新页面的标题
+						titleColor: "#ffffff", // 字体颜色,颜色值格式为"#RRGGBB",默认值为"#000000"
+						titleSize: "17px", // 字体大小,默认17px
+						backgroundColor: "#009BFD", // 控件背景颜色,颜色值格式为"#RRGGBB",默认值为"#F7F7F7"
+					}
+				}
+			});
+		}
+	</script>
+
+</html>

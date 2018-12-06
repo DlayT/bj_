@@ -1,0 +1,75 @@
+.mui-control-content .mui-loading {
+	margin-top: 150px;
+}
+
+.user-order-title {
+	color: black;
+	font-size: 14px;
+}
+
+.user-order-orderno {
+	color: #FC1500;
+	font-size: 12px;
+}
+
+.user-order-date {
+	color: black;
+	font-size: 12px;
+}
+
+.user-order-people {
+	font-size: 12px;
+	height: 20px;
+	line-height: 20px;
+}
+
+.user-order-content {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	height: 98px;
+	display: -webkit-flex;
+	-webkit-flex-direction: column;
+	-webkit-justify-content: space-between;
+}
+
+.price_left {
+	width: 50%;
+	line-height: 30px;
+	font-size: 14px;
+	text-align: center;
+	float: left;
+	color: white;
+	background-color: #94D5EB;
+}
+
+.price_left1 {
+	float: left;
+	width: 50%;
+	line-height: 30px;
+	font-size: 14px;
+	text-align: center;
+	color: #FFFFFF;
+	background-color: #009BFD;
+}
+
+.mui-table-view-cell>.mui-badge,
+.mui-table-view-cell>.mui-btn,
+.mui-table-view-cell>.mui-switch,
+.mui-table-view-cell>a>.mui-badge,
+.mui-table-view-cell>a>.mui-btn,
+.mui-table-view-cell>a>.mui-switch {
+	position: absolute;
+	top: inherit;
+	right: 15px;
+	-webkit-transform: translateY(-50%);
+	transform: translateY(-50%);
+	bottom: 0px;
+}
+
+.user-order-refund {
+	background-color: #009BFD;
+	border-radius: 3px;
+	color: white;
+	border: none;
+}

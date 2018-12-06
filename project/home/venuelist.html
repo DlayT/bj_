@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>场馆列表</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link rel="stylesheet" type="text/css" href="../../css/mui.min.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/base.app.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/home.index.css" />
+
+		<style type="text/css">
+			.mui-table-view.mui-grid-view {
+				padding: 0px !important;
+			}
+			
+			.mui-table-view .mui-grid-view .mui-table-view-cell {
+				display: inline-block;
+				text-align: center;
+				vertical-align: middle;
+			}
+		</style>
+
+	</head>
+
+	<body>
+		<div class="mui-content">
+			<div id="hotplacelist" class="">
+
+			</div>
+		</div>
+	</body>
+	
+	<script src="../../js/lib/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../../js/lib/mui.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../../js/lib/template.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../../js/require.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../../js/default.config.js" type="text/javascript" charset="utf-8"></script>
+
+	<script type="text/javascript">
+		document.write('<script src="../../js/common/base.utils.js?v=' + Math.random() + '" type="text/javascript" charset="utf-8">' + '<' + '/script>');
+		document.write('<script src="../../js/common/request.js?v=' + Math.random() + '" type="text/javascript" charset="utf-8">' + '<' + '/script>');
+		document.write('<script src="../../js/app/home/venuelist.js?v=' + Math.random() + '" type="text/javascript" charset="utf-8">' + '<' + '/script>');
+	</script>
+	
+	<!--热门场馆-->
+	<script type="text/html" id="tmp_hotplacelist">
+		<ul class="mui-table-view">
+			{{each result v i}}
+			<li class="mui-table-view-cell" onclick="venueDetail({{v}})">
+				<div class="activiy-content-media">
+					<!--<img src="../../img/activity_example.png" data-src={{v.imgpath}} class="lazyload activity-content-img"/>-->
+					<img class="activity-content-img" onerror="onerror=null;src='../../img/activity_example.png'" src={{v.imgpath}} />
+
+					<!--<img class="lazyload activity-content-img" onerror="onerror=null;src='../../img/activity_example.png'" data-src={{v.imgpath}}/>-->
+					<!--<img onerror="onerror=null;src='../../img/activity_example.png'" data-src={{v.imgpath}} class="lazyload activity-content-img"/>-->
+					<!--<div class="activiy-content-time">
+						预约截止时间：{{v.end_time}}
+					</div>-->
+				</div>
+				<div class="activiy-content-title">
+					<span>{{v.title}}</span>
+				</div>
+				<div class="activiy-content-appointment mui-pull-right">
+					<div class="activiy-appointment-btn mui-pull-right">
+						预约
+					</div>
+					<div class="activiy-appointment-price mui-pull-left">
+						<!--{{v.price}}元-->免费
+					</div>
+				</div>
+				<div class="activiy-content-venueprice mui-pull-left">
+					剩余可预约数量：{{v.reminder_quantity}}个
+				</div>
+			</li>
+			{{/each}}
+		</ul>
+	</script>
+
+</html>

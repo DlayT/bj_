@@ -1,0 +1,222 @@
+<!DOCTYPE HTML>
+<html>
+
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		<meta name="HandheldFriendly" content="true" />
+		<meta name="MobileOptimized" content="320" />
+		<title>扫码进馆</title>
+		<link rel="stylesheet" type="text/css" href="../../css/mui.min.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/base.app.css" />
+		<link rel="stylesheet" href="../../css/plus.common.css" type="text/css" charset="utf-8" />
+
+		<style type="text/css">
+			.button {
+				padding: 0;
+				text-align: center;
+				line-height: 60px;
+			}
+			
+			.piao-content-view {
+				width: 100%;
+				height: 312px;
+			}
+			
+			.piao-info-view {
+				width: 250px;
+				height: 100px;
+				border-radius: 10px;
+				display: flex;
+				display: -webkit-flex;
+				flex-direction: column;
+				-webkit-flex-direction: column;
+				justify-content: space-between;
+				-webkit-justify-content: space-between;
+				border: 1px solid #E8E8E8;
+				margin-top: 50px;
+			}
+			
+			.piao-line-view {
+				height: 50px;
+				line-height: 50px;
+			}
+			
+			.piao-label-view {
+				margin-left: 15px;
+			}
+			
+			body {
+				margin: 0;
+				padding: 0;
+				width: 100%;
+				height: 100%;
+				text-align: center;
+				display: flex;
+				display: -webkit-flex;
+				flex-direction: column;
+				-webkit-flex-direction: column;
+				justify-content: space-between;
+				-webkit-justify-content: space-between;
+				align-items: center;
+				-webkit-align-items: center;
+			}
+			
+			.app-horizon-center {
+				display: flex;
+				display: -webkit-flex;
+				justify-content: center;
+				-webkit-justify-content: center;
+			}
+			
+			.float-box {
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+			}
+			
+			.person-age-name-box {
+				width: 220px;
+				display: flex;
+				flex-direction: row;
+				justify-content: space-between;
+				margin-top: 5px;
+				margin-bottom: 5px;
+			}
+		</style>
+	</head>
+
+	<body>
+        <div class="mui-content mui-hidden">
+    		<img id="closeSelf" src="../../img/icon_close_floatwebview.png" style="width: 30px; position: absolute;right: 10px;top: 10px;padding: 5px;" />
+    		<div id="childmsg" class="float-box">
+    			<img id="childAvatar" style="width: 70px;" src="../../img/login_bg_small.png" />
+    			<span id="childName" style="margin-top: 5px;">卡布奇诺</span>
+    			<div class="person-age-name-box"><span id="childAge" style="padding-left: 30xp;">年龄：18</span><span id="childSex">性别：女</span></div>
+    			<div>手机号码：<span id="phoneNum">18570301575</span></div>
+    			<!--<div style="width:100%;height: 88px;bottom:0px;position: absolute;display: flex;align-items: center;background: transparent;">
+    				<div class="button" onclick="back()" style="width: 60px;height: 60px;margin: 0 auto;border-radius: 30px;">关闭</div>
+    			</div>-->
+    		</div>
+    		<div id="qrcodeimg" class="app-horizon-center piao-content-view" style="width: 100%;"></div>
+		</div>
+	</body>
+
+	<!--脚本文件改变 尽量放在底部 异步加载的问题-->
+
+	<script src="../../js/lib/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../../js/lib/mui.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../../js/common/utils.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../../js/lib/template.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../../js/common/plus.common.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../../js/require.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../../js/default.config.js" type="text/javascript" charset="utf-8"></script>
+	
+	
+	<script type="text/javascript">
+			document.write('<script src="../../js/common/base.utils.js?v=' + Math.random() + '" type="text/javascript" charset="utf-8">' + '<' + '/script>');
+			document.write('<script src="../../js/common/request.js?v=' + Math.random() + '" type="text/javascript" charset="utf-8">' + '<' + '/script>');
+	</script>
+	<script type="text/javascript">
+		//		mui.plusReady(function() {
+		(function() {
+			//			var web = plus.webview.currentWebview();
+			var web = JSON.parse(sessionStorage.getItem('piao'));
+//			alert(1111111);
+//			return false;
+			if (web.order_type == 3) {
+			    var sex = web.childgender == 0 ? '女' : '男';
+                var avatar = web.childavatar;
+                if(avatar != null) {
+                    document.getElementById('childAvatar').src = avatar;
+                }
+                document.getElementById('childName').innerHTML = web.childname;
+			    document.getElementById('childAge').innerHTML = '年龄：' + web.childage;
+                document.getElementById('childSex').innerHTML = '性别：' + sex;
+                document.getElementById('phoneNum').innerHTML = web.wardenmobile;
+			} else {
+			    $('.person-age-name-box').hide();
+			}
+			
+			if(web.type == 0) {
+				require(['session'], function(session) {
+				    if (web.order_type == 6) {
+				        if(session.user_avator()) {
+                            document.getElementById('childAvatar').src = session.user_avator();
+                        }
+				        document.getElementById('childName').innerHTML = session.nick_name();
+				        document.getElementById('phoneNum').innerHTML = session.mobile();
+				    }
+				    
+					var param = {
+						token: session.token(),
+						orderId: web.order_id,
+					};
+					var requestUrlStr = handleApiUrlPath('/Order/orderQr.html');
+					var xhr = new XMLHttpRequest();
+					xhr.open("POST", requestUrlStr, true);
+					xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+					xhr.responseType = "blob";
+					xhr.onload = function() {
+						if(this.status == 200) {
+							var blob = this.response;
+							var img = document.createElement("img");
+							img.onload = function(e) {
+								window.URL.revokeObjectURL(img.src);
+							};
+							img.src = window.URL.createObjectURL(blob);
+							$("#qrcodeimg").html(img);
+						}
+						hideLoading();
+					}
+					showLoading();
+					xhr.send("token=" + session.token() + '&orderId=' + web.order_id + '&device_type=web');
+				})
+			} else {
+				document.getElementById('childmsg').style.display = 'none';
+				require(['session'], function(session) {
+					var param = {
+						token: session.token(),
+						orderId: web.order_id
+					};
+					showLoading();
+					bjcpost('/Order/orderCheckNumber.html', param, function(responseData, error) {
+						hideLoading();
+						if(responseData) {
+							var mycards = template('tmp_yanpiao', {
+								'result': responseData
+							});
+							$("#qrcodeimg").html(mycards);
+						} else {
+						    hideLoading();
+							mui.toast(error);
+						}
+					})
+				})
+			}
+
+		})();
+		
+		mui('.mui-content').on('tap', '#closeSelf', function(){
+//		    console.log(parent.window);
+            parent.closeIframe();
+        })
+	</script>
+
+	<script type="text/html" id="tmp_yanpiao">
+		{{set order = result}}
+		<div class="piao-info-view">
+			<div class="piao-line-view" style="border-bottom:1px solid #E8E8E8;">
+				<div class="mui-pull-left piao-label-view">
+					订单号：{{order.order_id}}
+				</div>
+			</div>
+			<div class="piao-line-view">
+				<div class="mui-pull-left piao-label-view">
+					验票码：{{order.check_number}}
+				</div>
+			</div>
+		</div>
+	</script>
+
+</html>

@@ -1,0 +1,238 @@
+/*去掉table-view 底部的黑线*/
+
+.mui-table-view:after {
+	height: 0px;
+}
+
+.mui-table-view-cell:after {
+	left: 0px;
+}
+
+.home-header-lefticon {
+	width: 22px;
+	height: 16px;
+	margin-right: 10px;
+}
+
+.app-header-title {
+	margin-right: 10px;
+	/*	background: greenyellow;
+*/
+}
+
+.app-header-subtitle {
+	margin-right: 25px;
+	color: #808080;
+	/*	background: greenyellow;
+*/
+}
+
+.app-header-view {
+	/*	background: darkcyan;
+*/
+}
+
+
+/*活动图片*/
+
+.app-activity-img {
+	margin: 0px auto;
+}
+
+.activiy-content-media img {
+	vertical-align: bottom;
+}
+
+.activiy-content-media {
+	/*display: flex;
+	display: -webkit-flex;*/
+	justify-content: center;
+	-webkit-justify-content: center;
+	align-items: center;
+	-webkit-align-items: center;
+	position: relative;
+	/*	background: darkcyan;
+*/
+	margin: 0 15px;
+	border-radius: 13px;
+	overflow: hidden;
+}
+
+
+/*预定戒指时间*/
+
+.activiy-content-time {
+	background-color: black;
+	opacity: .5;
+	position: absolute;
+	top: 0;
+	left: 50%;
+	width: 60%;
+	transform: translateX(-50%);
+	;
+	-webkit-transform: translateX(-50%);
+	border-radius: 0px 0px 3px 3px;
+	color: white;
+	padding: 0px 5px;
+	font-size: 12px;
+	text-align: center;
+}
+
+.activity-content-img {
+	width: 100%;
+	/*margin-left: 10px;
+	margin-right: 10px;*/
+}
+
+#hotplacelist .mui-table-view-cell {
+	padding: 11px 0px;
+}
+
+#hotactivitylist .mui-table-view-cell {
+	padding: 11px 0px;
+}
+
+#cards .mui-table-view-cell {
+	padding: 11px 0px;
+}
+.activiy-content-title {
+	/*	background-color: aquamarine;
+*/
+	margin-top: 10px;
+	margin-left: 15px;
+	font-size: 13pt;
+}
+
+
+/*场馆价格*/
+
+.activiy-content-venueprice {
+	margin-top: 5px;
+	margin-left: 15px;
+	font-size: 11px;
+	background-color: #26A3FD;
+	padding: 0px 5px;
+	color: white;
+	border-radius: 3px;
+}
+
+.activiy-content-appointment {
+	/*	margin-top: 7px;
+*/
+	border: 1px solid #FC1500;
+	height: 20px;
+	min-width: 82px;
+	margin-right: 15px;
+	border-radius: 5px;
+	font-size: 12px;
+	/*	background: darkcyan;*/
+	/*margin-top: 5px;*/
+}
+
+.activiy-appointment-btn {
+	width: 44px;
+	background-color: #FC1500;
+	height: 100%;
+	font-size: 12px;
+	text-align: center;
+	color: white;
+	line-height: 18px;
+}
+
+.activiy-appointment-price {
+	padding: 0px 10px;
+	color: #FC1500;
+	line-height: 18px;
+}
+
+.mui-table-view.mui-grid-view {
+	padding: 0px !important;
+}
+
+.mui-table-view .mui-grid-view .mui-table-view-cell {
+	display: inline-block;
+	text-align: center;
+	vertical-align: middle;
+}
+
+.home-search-bar {
+	position: absolute;
+	width: 100%;
+	z-index: 10;
+	top: 25px;
+	display: flex;
+	display: -webkit-flex;
+	justify-content: center;
+	justify-content: center;
+	-webkit-justify-content: center;
+	height: 44px;
+	line-height: 44px;
+	/*background: red;*/
+}
+
+.home-search-input {
+	flex: 1;
+	width: 150px;
+	margin-left: 15px;
+	/*	width: calc(100% - 90px);
+	margin-left: 20px;
+	margin-right: 20px;
+	background-color: green;
+	*/
+}
+
+.mui-icon-mic-filled:before,
+.mui-icon-speech:before {
+	color: #009BFD;
+}
+
+.mui-icon-search:before {
+	color: #009BFD;
+}
+
+.mui-input-row.mui-search.home-search-input.mui-active::before {
+	color: #009BFD;
+	opacity: 1;
+}
+
+
+/*低版本会出问题*/
+
+.home-search-input input {
+	background-color: rgba(255, 255, 255, .9);
+	box-shadow: 0 2px 2px rgba(0, 0, 0, 0.5);
+	/*opacity: 0.8;*/
+}
+
+.mui-search .mui-placeholder {
+	line-height: 44px;
+	/*opacity: 0.8;*/
+}
+
+.home-msg-icon {
+	width: 30px;
+	height: 30px;
+	margin-right: 15px;
+	/*margin-right: 20px;*/
+	margin-left: 10px;
+	margin-top: 7px;
+}
+
+input[type=color],
+input[type=date],
+input[type=datetime-local],
+input[type=datetime],
+input[type=email],
+input[type=month],
+input[type=number],
+input[type=password],
+input[type=search],
+input[type=tel],
+input[type=text],
+input[type=time],
+input[type=url],
+input[type=week],
+select,
+textarea {
+	margin-bottom: 0px;
+}

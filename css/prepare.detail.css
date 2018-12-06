@@ -1,0 +1,89 @@
+.prepare-accompany-icon{
+	width: 20px;
+	height: 20px;
+/*	background: red;
+*/}
+
+.prepare-accompany-phonecontent{
+	margin-left: 50px;
+	line-height: 20px;
+}
+.prepare-accompany-namecontent{
+	margin-right: 10px;
+	line-height: 20px;
+}
+
+.prepare-accompany-phone{
+	font-size: 12px;
+	margin-left: 10px;
+}
+.prepare-accompany-name{
+	font-size: 12px;
+	margin-left: 10px;
+}
+
+.prepare-accompany-content{
+	display: flex;
+	display: -webkit-flex;
+	align-items: center;
+	-webkit-align-items: center;
+}
+
+#venue .mui-table-view-cell{
+	height: 44px;
+/*		background: green;
+*/
+}
+
+#accompanyinfo .mui-table-view-cell{
+	height: 44px;
+/*		background: green;
+*/
+}
+
+.mui-table-view:after {
+    left: 0;
+    height: 1px;
+}
+
+.mui-content>.mui-table-view:first-child {
+    margin-top: 0px;
+}
+
+.mui-control-content .mui-loading {
+	margin-top: 150px;
+}
+
+.user-order-title {
+	color: black;
+	font-size: 14px;
+}
+
+.user-order-orderno {
+	color: #000;
+	font-size: 12px;
+	
+}
+
+.user-order-people {
+	font-size: 12px;
+	height: 20px;
+	line-height: 20px;
+}
+
+.user-order-content {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	height: 98px;
+	display: -webkit-flex;
+	-webkit-flex-direction: column;
+	-webkit-justify-content: space-between;
+}
+
+.prepare-head-title{
+	line-height: 25px;
+	font-size: 14px;
+	color: #000000;
+	margin-left: 16px;
+}

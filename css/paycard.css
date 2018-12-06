@@ -1,0 +1,205 @@
+/*第一部分开始*/
+.top{
+	background-color: #009bfd;
+	width: 100%;
+	text-align: center;
+	color:#FFFFFF;
+	position: relative;
+	height: 44px;
+	font-size: 18px;
+	line-height: 44px;
+}
+.top i{
+	position: absolute;
+	display: block;
+	width: 8px;
+	height: 16px;
+	background: url(../img/fh.png) no-repeat;
+	background-size: 100%;
+	left: 15px;
+	top: 14px;
+}
+.activity{
+	padding: 13px 15px;
+	position: relative;
+	height: calc(125px - 26px);
+	background-color: #ffffff;
+	border-bottom: 1px solid #e6e6e6;
+}
+.activity_left{
+	width: 98px;
+	height: 98px;
+	background: url(../img/hdtp.png) no-repeat;
+	background-size: 100%;
+}
+.activity_left1{
+	padding-left: 10px;
+}
+.activity_left1 ul li{
+	line-height: 26px;
+	font-size: 12px;
+}
+.activity_left1 ul .titlehd{
+	font-size: 14px;
+	line-height: 23px;
+}
+.activity_left1 ul li span{
+	color: #fc1520;
+	padding-left: 20px;
+}
+.Numb{
+	width:89px;
+	height: 15px;
+	background: url(../img/Number.png) no-repeat;
+	background-size: 100%;
+	text-align: center;
+	line-height: 15px;
+	font-size: 12px;
+	position: absolute;
+	right: 15px;
+	top: 93px;
+}
+.Numb2{
+	width:89px;
+	height: 15px;
+	background: url(../img/Number.png) no-repeat;
+	background-size: 100%;
+	text-align: center;
+	line-height: 15px;
+	font-size: 12px;
+	position: absolute;
+	right: 15px;
+	top: 68px;
+}
+.Numb li{
+	width: 23px;
+	height: 15px;
+}
+.Numb li a{
+	width: 23px;
+	height: 15px;
+	display: block;
+}.Numb2 li a{
+	width: 23px;
+	height: 15px;
+	display: block;
+}
+.Date{
+	padding-left: 15px;
+	font-size: 14px;
+	line-height: 44px;
+	background-color: #ffffff;
+	position: relative;
+}
+.Date i{
+	position: absolute;
+	display: block;
+	width: 18px;
+	height: 18px;
+	background: url(../img/calendar.png) no-repeat;
+	background-size: 100%;
+	right: 15px;
+	top: 13px;
+}
+/*第一部分结束*/
+/*第二部分开始*/
+.payment{
+	line-height: 45px;
+	font-size: 16px;
+	color: #009BFD;
+	position: relative;
+	background-color: #ffffff;
+	margin-top: 15px;
+	padding-left: 44px;
+	border-bottom: 1px solid #E6E6E6;
+}
+.payment i{
+	width: 13px;
+	height: 13px;
+	background: url(../img/zhf.png) no-repeat;
+	background-size: 100%;
+	position: absolute;
+	left: 15px;
+	top: calc((44px - 13px) / 2);
+}
+.payment1{
+	line-height: 45px;
+	font-size: 14px;
+	color: #009BFD;
+	position: relative;
+	background-color: #ffffff;
+	padding-left: 44px;
+	border-bottom: 1px solid #E6E6E6;
+}
+.payment1 button{
+	padding: 0px;
+	width: 12px;
+	height: 12px;
+	border-radius: 12px;
+	background-color: #ffffff;
+	margin-left: 23px;
+	border: 1px solid #b3b3b3;
+}
+.payment1 i{
+	width: 13px;
+	height: 13px;
+	background: url(../img/zhf1.png) no-repeat;
+	background-size: 100%;
+	position: absolute;
+	left: 15px;
+	top: calc((44px - 13px) / 2);
+}
+.payment2{
+	line-height: 45px;
+	font-size: 14px;
+	color: #74ea00;
+	position: relative;
+	background-color: #ffffff;
+	padding-left: 44px;
+	border-bottom: 1px solid #E6E6E6;
+}
+.payment2 i{
+	width: 13px;
+	height: 13px;
+	background: url(../img/zhf2.png) no-repeat;
+	background-size: 100%;
+	position: absolute;
+	left: 15px;
+	top: calc((44px - 13px) / 2);
+}
+.payment2 button{
+	width: 12px;
+	height: 12px;
+	border-radius: 12px;
+	background-color: #74ea00;
+	margin-left: 36px;
+}
+/*第二部分结束*/
+/*底部开始*/
+.price{
+	position: fixed;
+	bottom: 0px;
+	background-color: #ffffff;
+	width: 100%;
+	height: 49px;
+}
+.price_left{
+	width: 50%;
+	line-height: 49px;
+	font-size: 16px;
+	text-align: center;
+	float: left;
+}
+.price_left span{
+	color: #fc1520;
+}
+.price_left1{
+	float: left;
+	width: 50%;
+	line-height: 49px;
+	font-size: 16px;
+	text-align: center;
+	color: #FFFFFF;
+	background-color: #009BFD;
+}
+/*底部结束*/

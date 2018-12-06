@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>用户注册</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link rel="stylesheet" type="text/css" href="../../css/mui.min.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/base.app.css" />
+
+		<style type="text/css">
+			.mui-input-row {
+				background-color: white;
+				height: 44px;
+				vertical-align: middle;
+			}
+			
+			.mylable {
+				font-size: 14px;
+				width: 33%;
+			}
+			
+			.myinput {
+				font-size: 15px;
+			}
+		</style>
+
+	</head>
+
+	<body>
+		<div class="mui-content" style="border: 1px solid transparent;">
+			<form class="mui-input-group" style="margin-top: 10px;">
+				<div class="mui-input-row">
+					<label class="mylable">手机号码：</label>
+					<input id="phone" type="number" class="mui-input-clear myinput" placeholder="请输入手机号码" />
+				</div>
+				<div class="mui-input-row">
+					<label class="mylable" style="width: 32%;">短信验证码：</label>
+					<button class="mui-btn mui-btn-primary" style="width: 20%;height: 25px;padding: 0;margin-right: 2%;font-size: 10px;margin-top: 7px;" onclick="time(this)">获取验证码</button>
+					<input id="code" type="number" style="width: 45%;" class="myinput" placeholder="请输入收到的验证码" />
+				</div>
+				<div class="mui-input-row">
+					<label class="mylable">昵称：</label>
+					<input id="nick" type="text" class="mui-input-clear myinput" placeholder="15字以内" />
+				</div>
+				<div class="mui-input-row mui-password">
+					<label class="mylable">密码：</label>
+					<input id="psw" type="password" class="mui-input-password myinput" />
+				</div>
+				<div id="" style="font-size: 12px;color: black;margin-left: 15px;height: 44px;" onclick="jumpToweb()">点击完成即同意
+					<span style="color: #009BFD;font-size: 12px;line-height: 44px;">《“百纪成长”用户注册协议》</span>
+				</div>
+			</form>
+			<div class="mui-button-row" style="margin-top: 15px;margin-bottom: 15px;">
+				<button id="registerBtn" data-loading-text="提交中" style="width: 150px;" type="button" class="mui-btn mui-btn-primary">完成注册</button>&nbsp;&nbsp;
+			</div>
+		</div>
+	</body>
+
+	<script src="../../js/lib/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../../js/lib/mui.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../../js/lib/template.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../../js/common/utils.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../../js/require.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../../js/default.config.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript">
+		document.write('<script src="../../js/common/base.utils.js?v=' + Math.random() + '" type="text/javascript" charset="utf-8">' + '<' + '/script>');
+		document.write('<script src="../../js/common/request.js?v=' + Math.random() + '" type="text/javascript" charset="utf-8">' + '<' + '/script>');
+		document.write('<script src="../../js/app/login/register.js?v=' + Math.random() + '" type="text/javascript" charset="utf-8">' + '<' + '/script>');
+	</script>
+
+</html>

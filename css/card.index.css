@@ -1,0 +1,155 @@
+.card-option-view {
+	width: 50%;
+	color: white;
+	text-align: center;
+	font-family: PingFang-SC-Regular;
+}
+
+.card-option-view-left {
+	width: 50%;
+	color: white;
+	text-align: center;
+	font-family: PingFang-SC-Regular;
+}
+
+.card-option-view-right {
+	width: 50%;
+	color: white;
+	text-align: center;
+	font-family: PingFang-SC-Regular;
+}
+
+.card-option-sep {
+	width: 1px;
+	height: calc(100% - 14px);
+	background-color: #E6E6E6;
+}
+
+.card-toptitle-content {
+	position: absolute;
+	width: calc(100% - 30px);
+	height: calc(100% - 22px);
+	display: flex;
+	display: -webkit-flex;
+	justify-content: space-between;
+	-webkit-justify-content: space-between;
+	color: white;
+	font-weight: 300;
+	font-size: 14px;
+}
+
+.card-bottomtitle-content {
+	position: absolute;
+	width: 100%;
+	bottom: 0px;
+	left: 0px;
+	background: rgba(0, 0, 0, .5);
+	height: 40px;
+	line-height: 30px;
+	font-weight: 300;
+	font-size: 16px;
+	display: flex;
+	display: -webkit-flex;
+	border-radius: 0 0 20px 20px;
+	justify-content: space-between;
+	-webkit-justify-content: space-between;
+	align-items: center;
+	-webkit-align-items: center;
+}
+
+.card-title-left {
+	height: 30px;
+	text-align: center;
+	line-height: 30px;
+	padding: 0px 15px;
+	border-top-left-radius: 5px;
+	border-bottom-right-radius: 5px;
+	background-color: black;
+	opacity: .3;
+	color: white;
+}
+
+.card-title-right {
+	height: 30px;
+	text-align: center;
+	line-height: 30px;
+	padding: 0px 15px;
+	border-top-right-radius: 5px;
+	border-bottom-left-radius: 5px;
+	background-color: black;
+	opacity: .3;
+}
+
+.card-title-bottom {
+	height: 30px;
+	text-align: center;
+	line-height: 30px;
+	padding: 0px 15px;
+	border-bottom-right-radius: 5px;
+}
+
+.home-header-lefticon {
+	width: 22px;
+	height: 22px;
+	margin-right: 10px;
+}
+
+.app-header-title {
+	margin-right: 10px;
+	/*	background: greenyellow;
+*/
+}
+
+.app-header-subtitle {
+	margin-right: 10px;
+	color: #808080;
+	/*	background: greenyellow;
+*/
+}
+
+#card_cards .mui-table-view-cell {
+	padding: 11px 0px;
+}
+
+#hotactivitylist .mui-table-view-cell {
+	padding: 11px 0px;
+}
+
+.activity-content-img {
+	width: 100%;
+	/*margin-left: 10px;
+	margin-right: 10px;*/
+}
+
+.activiy-content-media {
+	position: relative;
+	border-radius: 20px;
+	overflow: hidden;
+	margin: 0px 15px;
+	display: -webkit-flex;
+	display: flex;
+	justify-content: space-between;
+	-webkit-justify-content: space-between;
+	align-items: center;
+	-webkit-align-items: center;
+}
+
+.mui-table-view:after {
+	height: 0px;
+}
+
+.mui-table-view-cell:after {
+	left: 0px;
+}
+
+
+/*年卡 左上角优惠*/
+
+.card-leftup-benefit {
+	opacity: .5;
+	background-color: black;
+}
+
+ul .mui-table-view-cell:after {
+	height: 0px;
+}

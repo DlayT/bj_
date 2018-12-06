@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>我的订单</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link rel="stylesheet" type="text/css" href="../../css/mui.min.css" />
+		<link rel="stylesheet" type="text/css" href="../../js/lib/mescroll.min.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/base.app.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/myorder.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/order.list.css" />
+	</head>
+    <style type="text/css">
+    	.mui-btn{
+            padding: 0;
+            border: none;
+            border-radius: 0;
+        }
+    </style>
+	<body>
+		<div class="mui-content">
+			<div id="slider" class="mui-slider mui-fullscreen">
+				<div id="sliderSegmentedControl" class="mui-slider-indicator mui-segmented-control mui-segmented-control-inverted">
+					<!--<a class="mui-control-item mui-active" href="#item0">
+						全部
+					</a>-->
+					<a class="mui-control-item mui-active" href="#item0">
+						已预订
+					</a>
+					<a class="mui-control-item" href="#item1">
+						未支付
+					</a>
+					<a class="mui-control-item" href="#item2">
+						已支付
+					</a>
+				</div>
+				<div id="sliderProgressBar" class="mui-slider-progress-bar mui-col-xs-4"></div>
+				<div class="mui-slider-group">
+					<div id="item0" class="mui-slider-item mui-control-content mui-active">
+						<div id="scroll1" class="mui-scroll-wrapper">
+							<div class="mui-scroll mescroll" id="mescroll">
+								<ul class="mui-table-view">
+
+								</ul>
+							</div>
+						</div>
+					</div>
+
+					<div id="item1" class="mui-slider-item mui-control-content">
+						<div id="scroll2" class="mui-scroll-wrapper">
+							<div class="mui-scroll mescroll" id="mescroll1">
+								<ul class="mui-table-view">
+
+								</ul>
+							</div>
+						</div>
+					</div>
+
+					<div id="item2" class="mui-slider-item mui-control-content">
+						<div id="scroll3" class="mui-scroll-wrapper">
+							<div class="mui-scroll mescroll" id="mescroll2">
+								<ul class="mui-table-view">
+
+								</ul>
+							</div>
+						</div>
+					</div>
+					<!--<div id="item3" class="mui-slider-item mui-control-content">
+						<div id="scroll4" class="mui-scroll-wrapper">
+							<div class="mui-scroll">
+								<ul class="mui-table-view">
+
+								</ul>
+							</div>
+						</div>
+					</div>-->
+				</div>
+	</body>
+
+	<!--脚本文件改变 尽量放在底部 异步加载的问题-->
+
+	<script src="../../js/lib/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../../js/lib/mui.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../../js/common/utils.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../../js/lib/mescroll.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../../js/lib/template.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../../js/require.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../../js/default.config.js" type="text/javascript" charset="utf-8"></script>
+
+	<script type="text/javascript">
+		document.write('<script src="../../js/common/base.utils.js?v=' + Math.random() + '" type="text/javascript" charset="utf-8">' + '<' + '/script>');
+		document.write('<script src="../../js/common/request.js?v=' + Math.random() + '" type="text/javascript" charset="utf-8">' + '<' + '/script>');
+		document.write('<script src="../../js/app/order/myVenueOrder.js?v=' + Math.random() + '" type="text/javascript" charset="utf-8">' + '<' + '/script>');
+	</script>
+
+	<script type="text/javascript">
+		//控制回退
+		$(function() {
+			pushHistory();
+			window.addEventListener("popstate", function(e) {
+				location.href = bj_web_root+"/app_web.html#mine=#setting";
+				
+			}, false);
+
+			function pushHistory() {
+				var state = {
+					title: "title",
+					url: "#"
+				};
+				window.history.pushState(state, "title", "#");
+			}
+		});
+	</script>
+	<!--模板-->
+	<!--未支付-->
+	<!--orderStatus 订单状态，0-未支付，1-已支付，2-已退款，3-已取消，默认值：全部-->
+	<!--check_status 验票状态，0-未验票，1-已通过，2-拒绝入场，3-取消-->
+	<!-- order_type 类型，0-商品，1-活动，2-活动卡，3-场馆-->
+	<!--refund_type 退款状态，0没有申请退款状态  1-发起退款（退款中），2-同意退款，3-拒绝退款 4-->
+	<!--卡不支持退款完全走线下渠道-->
+	<script type="text/html" id="tmp_order_unpay">
+		{{ each result v i}} {{ if v.order_type == 2 }}
+		<!--卡或者商品 -->
+		<li class="mui-table-view-cell mui-media" id="{{v}}">
+			<img class="mui-media-object mui-pull-left" src={{v.imgpath}}>
+			<div class="user-order-content">
+				<div class="mui-media-body">
+					<div class="mui-ellipsis user-order-title">{{v.name}}</div>
+					<div class="mui-ellipsis user-order-orderno">订单号：{{v.order_sn}}</div>
+				</div>
+			</div>
+			{{if v.status==0 }}
+			<!--未支付-->
+			<div style="margin-top: 2px;">
+				<div class="price_left" value="{{v}}">取消</div>
+				<div class="price_left1 mui-btn" data-loading-text="支付中" value="{{v}}">去支付</div>
+			</div>
+			{{ /if }}
+		</li>
+		{{else if v.order_type==0}}
+		<!--抢购 -->
+		<li class="mui-table-view-cell mui-media" id="{{v}}">
+			<img class="mui-media-object mui-pull-left" src={{v.imgpath}}>
+			<div class="user-order-content">
+				<div class="mui-media-body">
+					<div class="mui-ellipsis user-order-title">{{v.name}}</div>
+					<div class="mui-ellipsis user-order-orderno">订单号：{{v.order_sn}}</div>
+				</div>
+				<div class="mui-media-body">
+					<div class="user-order-people">抢购数量：{{v.amount}}</div>
+				</div>
+			</div>
+			{{if v.status==0 }}
+			<!--未支付-->
+			<div style="margin-top: 2px;">
+				<div class="price_left" value="{{v}}">取消</div>
+				<div class="price_left1 mui-btn" data-loading-text="支付中" value="{{v}}">去支付</div>
+			</div>
+			{{ /if }}
+		</li>
+		{{ else }}
+		<!--场馆 -->
+		<li class="mui-table-view-cell mui-media" id="{{v}}">
+			<img class="mui-media-object mui-pull-left" src={{v.imgpath}}>
+			<div class="user-order-content">
+				<div class="mui-media-body">
+					<div class="mui-ellipsis user-order-title">{{v.name}} </div>
+					<div class="mui-ellipsis user-order-orderno">订单号：{{v.order_sn}}</div>
+				</div>
+
+				<div class="mui-media-body">
+				    {{if v.order_type == 6}}
+                    <div class="user-order-people">购买份数：{{v.amount}}份</div>
+				    {{ else }}
+				    <div id="venueDate" class="mui-ellipsis user-order-date">预约日期:{{v.quota_date}}</div>
+                    <div class="user-order-people">陪同人数：{{v.amount}}人</div>
+				    {{ /if }}
+				</div>
+			</div>
+
+			{{if v.status==0 }}
+			<div style="margin-top: 2px;">
+				<div class="price_left" value="{{v}}">取消</div>
+				<div class="price_left1 mui-btn" data-loading-text="支付中" value="{{v}}">去支付</div>
+			</div>
+			<!--如果已支付 且 订单商品是场馆 且没有验票 且退款状态大于0-->
+			{{else if v.status == 1 && v.order_type == 3 && v.check_status == 0}}
+			<div class="user-order-refund mui-btn" id="{{v}}">
+				{{v.refund_option_desc}}
+			</div>
+			{{ /if }}
+		</li>
+		{{ /if}} {{ /each}}
+	</script>
+
+</html>

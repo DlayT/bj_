@@ -1,0 +1,39 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../../css/mui.min.css" rel="stylesheet" />
+		<style type="text/css">
+			#questioncontent img{
+				max-width: 100%;
+				display:block;
+				margin: 0 auto;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div class="mui-content">
+			<div id="questioncontent" style="font-size: 12px;color: #272727;">
+				
+			</div>
+		</div>
+		<script src="../../js/lib/jquery.min.js"></script>
+		<script src="../../js/lib/mui.min.js"></script>
+		<script type="text/javascript">
+			mui.init()
+
+//			mui.plusReady(function() {
+			(function() {
+//				var self = plus.webview.currentWebview();
+				var self =JSON.parse( sessionStorage.getItem('questiondetail'));
+				$('#questioncontent').html(self.questionContent);
+				document.title = self.questionTitle;
+			})();
+		</script>
+	</body>
+
+</html>

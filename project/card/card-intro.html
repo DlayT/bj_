@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link rel="stylesheet" type="text/css" href="../../css/mui.min.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/base.app.css" />
+
+		<style type="text/css">
+
+		</style>
+
+		<script src="../../js/lib/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../js/lib/mui.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../js/lib/template.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../js/common/utils.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../js/require.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../js/default.config.js" type="text/javascript" charset="utf-8"></script>
+
+		<script type="text/javascript">
+		document.write('<script src="../../js/common/base.utils.js?v=' + Math.random() + '" type="text/javascript" charset="utf-8">' + '<' + '/script>');
+		document.write('<script src="../../js/common/request.js?v=' + Math.random() + '" type="text/javascript" charset="utf-8">' + '<' + '/script>');
+		</script>
+	</head>
+
+	<body>
+		<div class="mui-content">
+			<div style="padding-top: 10px; padding-bottom: 50px;margin-left: 5px;">
+				<span id="venuecontent" style="font-size: 12px;color: #272727;margin-top: 10px;">
+				<!--体育场馆介绍： 目前我校（包括：津南校区、八里台校区、泰达校区）体育场馆主要有： 体育馆3座，总建筑面积5万平方米，保障排球、羽毛球、乒乓球、游泳、健美、啦啦操、健美操、体育舞蹈、瑜伽、太极拳、跆拳道、散打、武术、女子防身术、国际象棋、中国象棋等专项课教学和学生课余体育活动。室外体育场地占地面积近12万平方米，包括田径场、足球场、篮球场、排球场、网球场、体操健身区等。其中： 八里台校区： 体育馆（老馆）建筑面积4200平米，设3个馆集羽毛球、排球教学训练和群体活动及办公功能与一体。 体育中心（新馆）建筑面积24600平米，其造型独特新颖，为钢网架结构，从空中俯瞰犹如一只巨型贝壳。功能集体育教学、体育比赛、大型演出等于一身，可承接国际性体育赛事，也可举行大型集会活动。馆内设有篮排综合馆、游泳馆、艺体教室、跆拳道室、武术室、瑜伽室、乒乓球室、健美教室、棋类教室、综合健身房等。综合馆设有6000个看台，曾承接第25届男篮亚锦赛、第12届全国大学生运动会女排比赛、第6届东亚运动会排球比赛等国内、国际大型赛事。游泳馆设有3米深10道50米标准比赛泳池一个，1.5米深6道25米训练池一个，采用水循环净化系统和水源热泵空调机组加温系统，保证水质水温达标。 主田径场占地26200平米，设有400米标准田径场一个、标准人工草足球场一个。另有室外全封闭式标准网球场6块，篮球场6块及器械活动区域。 西操场占地9300平方米有篮球场13块、排球场2块 另外八里台校区还有总共占地2100平米的4块排球场，占地500平米的器械（单双杠）专用场个一处。-->
+				</span>
+			</div>
+		</div>
+	</body>
+	<script type="text/javascript">
+		var content = document.getElementById('venuecontent');
+		//		mui.plusReady(function() {
+		(function() {
+			var web = getQueryString();
+			require(['session'], function(session) {
+				showLoading();
+				bjpost('/Card/cardAgreement.html', {
+					'cardId': web.id
+				}, function(responseData) {
+					hideLoading();
+					content.innerHTML = responseData.agreement;
+				}, function(error) {
+					hideLoading();
+					mui.toast(error);
+				})
+			})
+		})();
+	</script>
+
+</html>

@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>特价抢购订单</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link rel="stylesheet" type="text/css" href="../../css/mui.min.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/base.app.css" />
+
+		<style type="text/css">
+			.seckilltotal {
+				width: 50%;
+				line-height: 49px;
+				font-size: 16px;
+				text-align: center;
+				float: left;
+			}
+			
+			.seckilltotal span {
+				color: #FF0000;
+			}
+			
+			.seckilling {
+				float: left;
+				width: 50%;
+				line-height: 49px;
+				font-size: 16px;
+				text-align: center;
+				color: #FFFFFF;
+				background-color: #FF0000;
+			}
+			
+			.user-order-people {
+				font-size: 12px;
+				height: 20px;
+				line-height: 20px;
+			}
+			
+			.pay-way-header {
+				height: 44px;
+				line-height: 44px;
+				font-size: 16px;
+				color: #1d1d1d;
+			}
+			
+			.pay-way-name {
+				line-height: 34px;
+				font-size: 16px;
+				margin-left: 44px;
+			}
+			
+			.line {
+				width: 100%;
+				height: 15px;
+				background-color: #F1F1F1;
+			}
+			
+			.mui-radio input[type=radio]:checked:before {
+				content: '\e442';
+			}
+			
+			.mui-checkbox input[type=checkbox]:checked:before,
+			.mui-radio input[type=radio]:checked:before {
+				color: #74EA00;
+				font-size: 20px;
+			}
+			
+			.mui-checkbox input[type=checkbox]:before,
+			.mui-radio input[type=radio]:before {
+				font-size: 20px;
+				color: #74EA00;
+			}
+			
+			.pay-way-header {
+				height: 44px;
+				display: flex;
+				flex-direction: row;
+				align-items: center;
+			}
+			
+			.pay-way-header img {
+				width: 13px;
+				height: 13px;
+				margin-left: 15px;
+			}
+			
+			.pay-way-header span {
+				font-size: 16px;
+				color: #009BFD;
+				margin-left: 15px;
+			}
+		</style>
+
+	</head>
+
+	<body>
+		<div class="mui-content">
+			<div style="display: flex;flex-direction: row;padding: 15px;">
+				<img id="image" style="width: 100px;height: 100px;" src="../../img/hdtp.png" />
+				<div style="display: flex;flex-direction: column;justify-content: space-between;margin-left: 5px;">
+					<span id="title">华天自助餐三人餐</span>
+					<span id="price">￥9.0元</span>
+				</div>
+			</div>
+			<div style="display: flex;flex-direction: row;justify-content: space-between;padding-left: 15px;padding-right: 15px;padding-bottom: 10px;">
+				<span>购买数量：</span>
+				<div style="height: 20px;" class="mui-numbox" data-numbox-min='1' data-numbox-max='100'>
+					<button id="minusBtn" class="mui-btn mui-numbox-btn-minus" type="button">-</button>
+					<input id="number" class="mui-numbox-input" type="number" disabled="disabled" />
+					<button id="plusBtn" class="mui-btn mui-numbox-btn-plus" type="button">+</button>
+				</div>
+			</div>
+			<div class="line "></div>
+			<div class="pay-way-header">
+				<img src="../../img/icon_pay_choice.png" />
+				<span>支付方式</span>
+			</div>
+			<div style="height: 1px; " class="line "></div>
+			<ul id="payTypes" class="mui-table-view">
+				<li class="mui-table-view-cell mui-radio mui-right" style="font-size: 14px;" id="wxpay">
+					<div style="display: flex;flex-direction: row;align-items: center;">
+						<img style="width: 36px;height: 36px;" src="../../img/pay_weixin@2x.png" />
+						<input name="radio" type="radio" style="top: 20px;" checked="true">
+						<p style="margin-left: 22px;">微信支付</p>
+					</div>
+
+				</li>
+			</ul>
+
+			<div style="position: fixed;bottom: 0;width: 100%;background-color: #fff;">
+				<div class="seckilltotal ">
+					<span id="cardPrice">价格：</span>
+					<span id="pricetotal"></span>
+				</div>
+				<div id="seckillBtn" data-loading-text="支付中" class="seckilling ">立刻付款</div>
+			</div>
+		</div>
+	</body>
+
+	<script src="../../js/lib/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../../js/lib/mui.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../../js/lib/template.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../../js/common/utils.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../../js/common/utils.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../../js/require.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../../js/default.config.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript">
+		document.write('<script src="../../js/common/base.utils.js?v=' + Math.random() + '" type="text/javascript" charset="utf-8">' + '<' + '/script>');
+		document.write('<script src="../../js/common/request.js?v=' + Math.random() + '" type="text/javascript" charset="utf-8">' + '<' + '/script>');
+		document.write('<script src="../../js/app/home/panicbuyingorder.js?v=' + Math.random() + '" type="text/javascript" charset="utf-8">' + '<' + '/script>');
+	</script>
+
+</html>

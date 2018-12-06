@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>年卡明细</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link rel="stylesheet" type="text/css" href="../../css/mui.min.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/base.app.css" />
+
+		<style type="text/css">
+			.mui-table-view-cell:after {
+				background-color: #ffffff;
+			}
+			
+			.mui-navigate-right:after,
+			.mui-push-left:after,
+			.mui-push-right:after {
+				color: #fff;
+			}
+		</style>
+
+		<script src="../../js/lib/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../js/lib/mui.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../js/lib/template.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../js/require.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../js/default.config.js" type="text/javascript" charset="utf-8"></script>
+	
+		<script type="text/javascript">
+			document.write('<script src="../../js/common/base.utils.js?v=' + Math.random() + '" type="text/javascript" charset="utf-8">' + '<' + '/script>');
+			document.write('<script src="../../js/common/request.js?v=' + Math.random() + '" type="text/javascript" charset="utf-8">' + '<' + '/script>');
+		</script>
+	
+	</head>
+
+	<body>
+		<div class="mui-content">
+
+			<body>
+				<div class="mui-content" style="background-color:#F1F1F1;">
+					<div style="background-color:white;width:100%;height: 24px;">
+						<span style="float: right;font-size: 12px;color: #009BFD;margin-right: 8px;">年卡说明?</span>
+					</div>
+					<ul class="mui-table-view" style="background-color: orange;margin-top: 8px;">
+						<li class="mui-row" style="position:relative;overflow: hidden;">
+							<div class="" style="width:20%;float: left;">
+								<span style="text-align:center;position: absolute;top:50%;width: 30px;margin-left:5%;margin-top: -10%;">互动体验</span>
+
+							</div>
+							<div class="" style="width:80%;float: right;">
+								<ul style="padding-left: 0px;border-left:solid;border-left-color: white;border-width: 1px;">
+									<li class="mui-table-view-cell">
+										<a class="mui-navigate-right">湖南科技馆1次</a>
+									</li>
+									<li class="mui-table-view-cell">
+										<a class="mui-navigate-right">湖南科技馆1次</a>
+									</li>
+									<li class="mui-table-view-cell">
+										<a class="mui-navigate-right">湖南科技馆1次</a>
+									</li>
+									<li class="mui-table-view-cell">
+										<a class="mui-navigate-right">湖南科技馆1次</a>
+									</li>
+									<li class="mui-table-view-cell">
+										<a class="mui-navigate-right">湖南科技馆1次</a>
+									</li>
+								</ul>
+
+							</div>
+
+						</li>
+					</ul>
+
+					<ul class="mui-table-view" style="background-color: orangered;margin-top: 8px;margin-bottom: 8px;">
+						<li class="mui-row" style="position:relative;overflow: hidden;">
+							<div class="" style="width:20%;float: left;">
+								<span style="text-align:center;position: absolute;top:50%;width: 30px;margin-left:5%;margin-top: -10%;">亲子乐园</span>
+
+							</div>
+							<div class="" style="width:80%;float: right;">
+								<ul style="padding-left: 0px;border-left:solid;border-left-color: white;border-width: 1px;">
+									<li class="mui-table-view-cell">
+										<a class="mui-navigate-right">湖南科技馆1次</a>
+									</li>
+									<li class="mui-table-view-cell">
+										<a class="mui-navigate-right">湖南科技馆1次</a>
+									</li>
+									<li class="mui-table-view-cell">
+										<a class="mui-navigate-right">湖南科技馆1次</a>
+									</li>
+								</ul>
+
+							</div>
+
+						</li>
+					</ul>
+
+					<ul class="mui-table-view" style="background-color: greenyellow;">
+						<li class="mui-row" style="position:relative;overflow: hidden;">
+							<div class="" style="width:20%;float: left;">
+								<span style="text-align:center;position: absolute;top:50%;width: 30px;margin-left:5%;margin-top: -10%;">运动拓展</span>
+
+							</div>
+							<div class="" style="width:80%;float: right;">
+								<ul style="padding-left: 0px;border-left:solid;border-left-color: white;border-width: 1px;">
+									<li class="mui-table-view-cell">
+										<a class="mui-navigate-right">湖南科技馆1次</a>
+									</li>
+									<li class="mui-table-view-cell">
+										<a class="mui-navigate-right">湖南科技馆1次</a>
+									</li>
+								</ul>
+
+							</div>
+
+						</li>
+					</ul>
+				</div>
+			</body>
+		</div>
+	</body>
+
+	<script type="text/javascript">
+		document.addEventListener('get_detail', function(event) {
+			wflog(event.detail)
+		})
+	</script>
+
+</html>

@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>百纪卡</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link rel="stylesheet" type="text/css" href="../../css/mui.min.css" />
+		<link rel="stylesheet" type="text/css" href="../../js/lib/mescroll.min.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/base.app.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/card.index.css" />
+		<style type="text/css">
+			ul .mui-table-view-cell:after {
+				height: 0px;
+			}
+		</style>
+
+	</head>
+
+	<body>
+		<header class="app-navbar-config mui-bar mui-bar-nav " style="height: 64px;">
+			<button id="cardBtn" type="button" class="mui-btn  mui-btn-link mui-pull-right" style="color: white;margin-right: 2px;margin-top: 21px;">我的卡包</button>
+			<h1 id="title" class="mui-title" style="margin-top: 20px;">百纪卡</h1>
+			<a href="../user/user.card.html"></a>
+		</header>
+		<div class="mui-content mescroll" id="mescroll" style="margin-top: 20px;">
+			<!--slider-->
+			<div id="slider" class="mui-slider"></div>
+			<div class="app-seperate-view"></div>
+			<div id="cards" class=""></div>
+		</div>
+	</body>
+
+	<script src="../../js/lib/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../../js/lib/mui.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../../js/lib/template.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../../js/lib/mescroll.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../../js/require.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../../js/default.config.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript">
+			document.write('<script src="../../js/common/base.utils.js?v=' + Math.random() + '" type="text/javascript" charset="utf-8">' + '<' + '/script>');
+			document.write('<script src="../../js/common/request.js?v=' + Math.random() + '" type="text/javascript" charset="utf-8">' + '<' + '/script>');
+			document.write('<script src="../../js/app/card/card.index.js?v=' + Math.random() + '" type="text/javascript" charset="utf-8">' + '<' + '/script>');
+	</script>
+
+
+	<script type="text/html" id="tmp_slider">
+		<div class="mui-slider-group mui-slider-loop">
+			<div class="mui-slider-item mui-slider-item-duplicate" onclick="jumpToweb('{{result[result.length - 1]}}')">
+				<a href="#">
+					<img src={{result[result.length - 1].imgpath}}>
+				</a>
+			</div>
+			{{each result v i}}
+			<div class="mui-slider-item" onclick="jumpToweb('{{v}}')">
+				<a href="#">
+					<img src={{result[i].imgpath}}>
+				</a>
+			</div>
+			{{/each}}
+
+			<div class="mui-slider-item mui-slider-item-duplicate" onclick="jumpToweb('{{result[0]}}')">
+				<a href="#">
+					<img src={{result[0].imgpath}}>
+				</a>
+			</div>
+		</div>
+
+		<div class="mui-slider-indicator">
+			<div class="mui-indicator mui-active"></div>
+			<% for(var i = 1; i < result.length; i++){ %>
+			<div class="mui-indicator"></div>
+			<% } %>
+		</div>
+	</script>
+
+	<script type="text/html" id="tmp_cards">
+		<div class="app-header-view mui-table-view-cell mui-media">
+			<div>
+				<img style="margin-left: 15px;" class="home-header-lefticon mui-media-object mui-pull-left" src="../../img/home_header_lefticon@2x.png" />
+				<div class="mui-media-object app-header-title mui-pull-left">
+					优质卡展示
+				</div>
+			</div>
+		</div>
+		<ul class="mui-table-view">
+			{{each result v i}}
+			<li class="mui-table-view-cell" id={{v}}>
+				<div class="activiy-content-media">
+					<img class="activity-content-img" src={{v.imgpath}}></img>
+					<div class="card-bottomtitle-content" style="">
+						<div class="card-option-view-left" id={{v}}>
+							在线购卡
+						</div>
+						<div class="card-option-sep"></div>
+						<div class="card-option-view-right" id={{v}}>
+							实体卡激活
+						</div>
+					</div>
+				</div>
+			</li>
+			{{/each}}
+		</ul>
+	</script>
+
+	<script type="text/javascript">
+		mui.plusReady(function() {
+			var bi = plus.navigator.isImmersedStatusbar();
+			console.log('Immersed Statusbar: ' + bi ? 'Yes' : 'No');
+		})
+	</script>
+
+</html>

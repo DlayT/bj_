@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>购买卡</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link rel="stylesheet" type="text/css" href="../../css/mui.min.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/base.app.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/myorder.css" />
+
+		<style type="text/css">
+			.user-order-title {
+				color: black;
+				font-size: 14px;
+			}
+			
+			.user-order-orderno {
+				color: #FC1500;
+			}
+			
+			.user-order-people {
+				font-size: 12px;
+				height: 20px;
+				line-height: 20px;
+				color: '#FC1520';
+			}
+			
+			.user-order-accompany {
+				display: flex;
+				display: -webkit-flex;
+				justify-content: space-between;
+				-webkit-justify-content: space-between;
+				align-items: center;
+				-webkit-align-items: center;
+				font-size: 12px;
+				height: 20px;
+				line-height: 20px;
+			}
+			
+			.user-order-content {
+				display: flex;
+				flex-direction: column;
+				justify-content: space-between;
+				height: 98px;
+				display: -webkit-flex;
+				-webkit-flex-direction: column;
+				-webkit-justify-content: space-between;
+			}
+			
+			.prepare-order-date {
+				display: flex;
+				justify-content: space-between;
+				height: 44px;
+				display: -webkit-flex;
+				-webkit-justify-content: space-between;
+				align-items: center;
+				-webkit-align-items: center;
+				font-size: 14px;
+				/*				background: darkblue;
+*/
+			}
+			
+			.prepare-order-date img {
+				width: 18px;
+				height: 18px;
+			}
+			
+			.pay-way-header {
+				height: 44px;
+				line-height: 44px;
+				font-size: 16px;
+				color: #1d1d1d;
+			}
+			
+			.pay-way-header:after {
+				position: absolute;
+				right: 0;
+				bottom: 0;
+				left: 15px;
+				height: 1px;
+				content: '';
+				-webkit-transform: scaleY(.5);
+				transform: scaleY(.5);
+				background-color: #c8c7cc;
+			}
+			
+			#payway img {
+				line-height: 34px;
+				max-width: 34px;
+				height: 34px;
+			}
+			
+			.pay-way-name {
+				line-height: 34px;
+				font-size: 16px;
+				margin-left: 44px;
+			}
+			
+			#payway:before {
+				height: 1px;
+			}
+			/*.mui-table-view-radio .mui-table-view-cell.mui-selected .mui-navigate-right:after {
+				content: '\e61f' !important;
+			}*/
+			
+			.price_left {
+				width: 50%;
+				line-height: 49px;
+				font-size: 16px;
+				text-align: center;
+				float: left;
+			}
+			
+			.price_left span {
+				color: #fc1520;
+			}
+			
+			.price_left1 {
+				float: left;
+				width: 50%;
+				line-height: 49px;
+				font-size: 16px;
+				text-align: center;
+				color: #FFFFFF;
+				background-color: #009BFD;
+			}
+			
+			.mui-numbox {
+				padding: 0 25px;
+			}
+			
+			.mui-numbox [class*=btn-numbox],
+			.mui-numbox [class*=numbox-btn] {
+				width: 25px;
+			}
+			
+			.mui-radio input[type=radio]:checked:before {
+				content: '\e442';
+			}
+			
+			.mui-checkbox input[type=checkbox]:checked:before,
+			.mui-radio input[type=radio]:checked:before {
+				color: #74EA00;
+				font-size: 20px;
+			}
+			
+			.mui-checkbox input[type=checkbox]:before,
+			.mui-radio input[type=radio]:before {
+				font-size: 20px;
+				color: #74EA00;
+			}
+			
+			.pay-way-header {
+				height: 44px;
+				display: flex;
+				flex-direction: row;
+				align-items: center;
+			}
+			
+			.pay-way-header img {
+				width: 13px;
+				height: 13px;
+				margin-left: 15px;
+			}
+			
+			.pay-way-header span {
+				font-size: 16px;
+				color: #009BFD;
+				margin-left: 15px;
+			}
+			.mui-btn{
+                padding: 0;
+                border: none;
+                border-radius: 0;
+            }
+		</style>
+
+	</head>
+
+	<body>
+	    <form action="" method="post" name="myFrom">
+            <input type="hidden" id="jsonRequestData" name="jsonRequestData" />
+            <!--<input type="submit" name="提交">-->
+        </form>
+		<div class="mui-content">
+			<ul class="mui-table-view" id="orderinfo">
+				<li class="mui-table-view-cell mui-media" id="{{v}}">
+					<img id="cardPic" class="mui-media-object mui-pull-left">
+					<div class="user-order-content">
+						<div class="mui-media-body">
+							<div id="cardName" class="mui-ellipsis user-order-title"></div>
+						</div>
+
+						<div class="mui-media-body">
+							<div id="stuName" class="user-order-people">学生：</div>
+
+							<div class="user-order-accompany">
+								<div id="cardPrice" class="user-order-people">
+									价格：
+								</div>
+							</div>
+						</div>
+				</li>
+			</ul>
+			<div class="app-seperate-view"></div>
+
+			<div class="pay-way-header">
+				<img src="../../img/icon_pay_choice.png" />
+				<span>支付方式</span>
+			</div>
+			<div style="height: 1px; " class="line "></div>
+			<ul id="payTypes" class="mui-table-view">
+				<li class="mui-table-view-cell mui-radio mui-right" style="font-size: 14px;" id="wxpay">
+					<div style="display: flex;flex-direction: row;align-items: center;">
+						<img style="width: 36px;height: 36px;" src="../../img/pay_weixin@2x.png" />
+						<input name="radio" type="radio" style="top: 20px;" checked="true">
+						<p style="margin-left: 22px;">微信支付</p>
+					</div>
+
+				</li>
+				<!--<li class="mui-table-view-cell mui-radio mui-right" style="font-size: 14px;" id="alipay">
+					<div style="display: flex;flex-direction: row;align-items: center;">
+						<img style="width: 36px;height: 36px;" src="../../img/pay_zhifubao@2x.png" />
+						<input name="radio" type="radio" style="top: 20px;">
+						<p style="margin-left: 22px;">支付宝支付</p>
+					</div>
+				</li>-->
+				<li class="mui-table-view-cell mui-radio mui-right" style="font-size: 14px; border-bottom:.5px solid #C8C7CC;" id="cmbpay">
+					<div style="display: flex;flex-direction: row;align-items: center;">
+						<img style="width: 36px;height: 36px;" src="../../img/zhaohang@2x.png" />
+						<input name="radio" type="radio" style="top: 20px;">
+						<p style="margin-left: 22px;">一网通支付</p>
+					</div>
+				</li>
+			</ul>
+
+			<div style="position: fixed;bottom: 0;width: 100%;background-color: #fff;" class="price">
+				<div id="card-price" class="price_left">订单总价：
+					<span id="ordertotalprice">
+						
+					</span>
+				</div>
+				<div id="payBtn" data-loading-text="购买中" class="price_left1 mui-btn">确认购买</div>
+			</div>
+	</body>
+
+	<!--脚本文件改变 尽量放在底部 异步加载的问题-->
+
+	<script src="../../js/lib/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../../js/lib/mui.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../../js/lib/template.js" type="text/javascript" charset="utf-8"></script>
+	<!--<script src="../../js/common/utils.min.js" type="text/javascript" charset="utf-8"></script>-->
+	<script src="../../js/common/utils.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../../js/require.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../../js/default.config.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			document.write('<script src="../../js/common/base.utils.js?v=' + Math.random() + '" type="text/javascript" charset="utf-8">' + '<' + '/script>');
+			document.write('<script src="../../js/common/request.js?v=' + Math.random() + '" type="text/javascript" charset="utf-8">' + '<' + '/script>');
+			document.write('<script src="../../js/app/card/card.createorder.js?v=' + Math.random() + '" type="text/javascript" charset="utf-8">' + '<' + '/script>');
+	</script>
+
+	<script type="text/html" id="tmp_related_card_table">
+		{{each result v i}}
+		<li class="mui-table-view-cell mui-media">
+			<div class="mui-navigate-right">
+				<img class="mui-pull-left" src="../../img/pay_weixin@2x.png">
+				<div class="pay-way-name">
+					学生卡
+				</div>
+			</div>
+
+		</li>
+		{{/each}}
+	</script>
+
+</html>

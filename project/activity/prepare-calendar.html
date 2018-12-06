@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link rel="stylesheet" type="text/css" href="../../css/mui.min.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/base.app.css" />
+
+		<style type="text/css">
+			.date-span {
+				position: fixed;
+				width: 100%;
+				top: 0px;
+				padding-top: 15px;
+				padding-bottom: 15px;
+				text-align: center;
+				background-color: #fff;
+				color: #323232;
+				z-index: 22;
+			}
+			
+			.line-gray {
+				width: 100%;
+				height: 1px;
+				background-color: #e5e5e5;
+				position: relative;
+				top: 14px;
+			}
+			
+			.one-date {
+				width: 100px;
+				height: 100px;
+				display: flex;
+				background: url(../../img/calendar-bg.png) no-repeat;
+				flex-direction: column;
+				align-items: flex-end;
+				justify-content: space-between;
+				background-size: 100%;
+				margin-top: 15px;
+			}
+			
+			.residue {
+				font-size: 12px;
+				box-sizing: border-box;
+			}
+			
+			.btn-prepare {
+				position: fixed;
+				width: 100%;
+				height: 49px;
+				background: #009BFD;
+				color: white;
+				bottom: 0;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div class="mui-content" style="display: flex;flex-direction: column;">
+			<div class="date-span"><span id="currentDate"></span>
+				<div class="line-gray"></div>
+			</div>
+
+			<div id="grid" style="flex: 1;"></div>
+
+			<button id="btn" class="btn-prepare">确定</button>
+		</div>
+	</body>
+	<script src="../../js/lib/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../../js/lib/mui.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../../js/lib/template.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../../js/require.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../../js/default.config.js" type="text/javascript" charset="utf-8"></script>
+	
+	<script type="text/javascript">
+			document.write('<script src="../../js/common/base.utils.js?v=' + Math.random() + '" type="text/javascript" charset="utf-8">' + '<' + '/script>');
+			document.write('<script src="../../js/common/request.js?v=' + Math.random() + '" type="text/javascript" charset="utf-8">' + '<' + '/script>');
+			document.write('<script src="../../js/app/activity/prepare-calendar.js?v=' + Math.random() + '" type="text/javascript" charset="utf-8">' + '<' + '/script>');
+	</script>
+	
+	<script id="calendargrid" type="text/html">
+		<div class="mui-table-view mui-grid-view own-gray-color" style="padding:50px 0 80px 0; ">
+			{{ each result v i }}
+			<!--<li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-4">
+				<label for="date" class="one-date">
+					<input value="{{ v.day }}" class="mui-radio" name="date" type="radio" style="margin: 5px;" />
+					<span>{{v.day}}</span>
+					<div class="residue">余票：{{v.quantity}}</div>
+				</label>
+			</li>-->
+
+			<li class="mui-table-view-cell mui-media mui-col-xs-3 mui-col-sm-3" id="{{i}}">
+				<div class="" style="background-color: #009BFD;text-align: center;position: relative;border-radius: 4px;">
+					<div class="" style="color: white;font-size: 12px;line-height: 30px;height: 30px;">
+						<!--余票：{{v.quantity}}-->
+						{{v.week}}
+					</div>
+					<img src="../../img/venue_calendar_sep.png" style="width: 100%;display: block;" />
+					<div class="" style="line-height: 44px;height: 44px;font-size: 28px;color: white;">
+						{{v.day}}
+					</div>
+					<img src="../../img/venue_calendar_checked.png" class="calendar-check-img" style="position: absolute;width: 20px;bottom: 0;right: 0;display: none;" />
+				</div>
+			</li>
+			{{ /each }}
+		</div>
+	</script>
+
+	<script type="text/javascript">
+	</script>
+
+</html>

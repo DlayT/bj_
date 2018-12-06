@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>首页</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+
+		<link rel="stylesheet" type="text/css" href="../../css/mui.min.css" />
+		<link rel="stylesheet" type="text/css" href="../../js/lib/mescroll.min.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/base.app.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/home.index.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/card.index.css" />
+		<style>
+			.mui-search .mui-placeholder {
+				font-size: 16px;
+				line-height: 46px;
+				position: absolute;
+				z-index: 1;
+				top: 0;
+				right: 0;
+				bottom: 0;
+				left: 0;
+				display: inline-block;
+				height: 34px;
+				text-align: left;
+				padding-left: 15px;
+				color: #999;
+				border: 0;
+				border-radius: 6px;
+				background: 0 0;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div class="home-search-bar">
+			<div id="searchView" class="mui-input-row mui-search home-search-input">
+				<input id="search" type="search" class="mui-input-clear" placeholder="搜索场馆" disabled="disabled">
+			</div>
+			<img id="myMessage" class="home-msg-icon" src="../../img/icon_home_msg.png" />
+		</div>
+
+		<div class="mui-content mescroll" id="mescroll">
+			<!--slider-->
+			<div id="slider" class="mui-slider"></div>
+			<!--newmodule-->
+			<div id="module"></div>
+
+			<div id="cards" class=""></div>
+
+			<div id="hotplacelist" class=""></div>
+			<!--热门活动  活动暂时去掉 只做-->
+			<!--<div id="hotplaceheader" class="app-header-view mui-table-view-cell mui-media">
+				<div class="mui-navigate-right">
+					<img class="home-header-lefticon mui-media-object mui-pull-left" src="../../img/home_header_leftactivity@2x.png" />
+					<div class="mui-media-object app-header-title mui-pull-left">
+						本季热门活动
+					</div>
+					<div class="mui-media-object app-header-subtitle mui-pull-right">
+						更多
+					</div>
+				</div>
+			</div>
+
+			<div id="hotactivitylist" class="">
+			</div>-->
+		</div>
+	</body>
+
+	<script src="../../js/lib/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../../js/lib/layer.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../../js/lib/mui.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../../js/lib/template.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../../js/lib/mescroll.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../../js/require.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../../js/home.config.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript">
+		document.write('<script src="../../js/common/base.utils.js?v=' + Math.random() + '" type="text/javascript" charset="utf-8">' + '<' + '/script>');
+		document.write('<script src="../../js/common/request.js?v=' + Math.random() + '" type="text/javascript" charset="utf-8">' + '<' + '/script>');
+		document.write('<script src="../../js/app/home/home.index.js?v=' + Math.random() + '" type="text/javascript" charset="utf-8">' + '<' + '/script>');
+	</script>
+	<script type="text/html" id="tmp_slider">
+		<div class="mui-slider-group mui-slider-loop">
+			<div class="mui-slider-item mui-slider-item-duplicate" onclick="jumpToweb('{{result[result.length - 1]}}')">
+				<a href="#">
+					<!--<img src="vague.jpg" data-src={{result[result.length - 1].imgpath}} class="lazyload"/>-->
+					<img src={{result[result.length - 1].imgpath}}>
+				</a>
+			</div>
+			{{each result v i}}
+			<div class="mui-slider-item" onclick="jumpToweb('{{v}}')">
+				<a href="#">
+					<img src={{result[i].imgpath}}>
+				</a>
+			</div>
+			{{/each}}
+
+			<div class="mui-slider-item mui-slider-item-duplicate" onclick="jumpToweb('{{result[0]}}')">
+				<a href="#">
+					<img src={{result[0].imgpath}}>
+				</a>
+			</div>
+		</div>
+
+		<div class="mui-slider-indicator">
+			<div class="mui-indicator mui-active"></div>
+			<% for(var i = 1; i < result.length; i++){ %>
+			<div class="mui-indicator"></div>
+			<% } %>
+		</div>
+	</script>
+
+	<!--活动分类-->
+	<script type="text/html" id="tmp_category">
+		<ul id="modulelist" class="mui-table-view mui-grid-view">
+			{{each result v i}}
+			<div style="width: 25%;" class="mui-table-view-cell" id="a" onclick="toActivityList({{v}})">
+				<!--<div id="" style="background: red;position: absolute;right: 0;top: 0;border-radius: 13px;width: 33px;height: 13px;font-size: 10px;line-height: 13px;color: white;">
+					NEW
+				</div>-->
+				<div id="" style="height: 10px;">
+					<!--上边距-->
+				</div>
+				{{if v.have_new==1 }}
+				<img style="position: absolute;right: 5px;top: 15px;width: 33px;height: 13px;" src="../../img/home_icon_new.png" /> {{ /if }}
+				<img style="width: 45px ;height: 45px;" src={{v.icon}} />
+				<br />
+				<span style="font-size: 12px;">{{v.name}}</span>
+				<div id="" style="height: 10px;">
+					<!--下边距-->
+				</div>
+			</div>
+			{{/each}}
+		</ul>
+	</script>
+
+	<!--热门场馆-->
+	<script type="text/html" id="tmp_hotplacelist">
+		<div class="app-seperate-view"></div>
+		<!--热门场馆-->
+		<div id="hotplaceheader" class="app-header-view mui-table-view-cell mui-media">
+			<div>
+				<img style="margin-left: 15px;" class="home-header-lefticon mui-media-object mui-pull-left" src="../../img/home_header_lefticon@2x.png" />
+				<div class="mui-media-object app-header-title mui-pull-left">
+					场馆展示
+				</div>
+				<!--<div class="mui-media-object app-header-subtitle mui-pull-right" onclick="toActivityList('所有场馆','0')">
+					更多
+				</div>-->
+			</div>
+		</div>
+		<ul class="mui-table-view">
+			{{each result v i}}
+			<li class="mui-table-view-cell" onclick="venueDetail({{v}})">
+				<div class="activiy-content-media">
+					<!--<img src="../../img/activity_example.png" data-src={{v.imgpath}} class="lazyload activity-content-img"/>-->
+					<img class="activity-content-img" onerror="onerror=null;src='../../img/activity_example.png'" src={{v.imgpath}} />
+
+					<!--<img class="lazyload activity-content-img" onerror="onerror=null;src='../../img/activity_example.png'" data-src={{v.imgpath}}/>-->
+					<!--<img onerror="onerror=null;src='../../img/activity_example.png'" data-src={{v.imgpath}} class="lazyload activity-content-img"/>-->
+					<!--<div class="activiy-content-time">
+						预约截止时间：{{v.end_time}}
+					</div>-->
+				</div>
+				<div class="activiy-content-title">
+					<span>{{v.title}}</span>
+					<div class="activiy-content-appointment mui-pull-right">
+						<div class="activiy-appointment-btn mui-pull-right">
+							预约
+						</div>
+						<div class="activiy-appointment-price mui-pull-left">
+							<!--{{v.price}}元-->免费
+						</div>
+					</div>
+				</div>
+
+				<!--<div class="activiy-content-venueprice mui-pull-left">
+					剩余可预约数量：{{v.reminder_quantity}}个
+				</div>-->
+			</li>
+			{{/each}}
+		</ul>
+	</script>
+
+	<script type="text/html" id="tmp_hotactivitylist">
+		<ul class="mui-table-view">
+			{{each result v i}}
+			<li class="mui-table-view-cell">
+				<div class="activiy-content-media">
+					<img class="activity-content-img" src="../../img/activity_example.png" />
+					<div class="activiy-content-time">预订截止时间：2018年3月25日</div>
+				</div>
+				<div class="activiy-content-title">{{v.title}}</div>
+				<div class="activiy-content-venueprice mui-pull-left">总价：100元 | 订金：50元</div>
+
+				<div class="activiy-content-appointment mui-pull-right">
+					<div class="activiy-appointment-btn mui-pull-right">去预定</div>
+					<div class="activiy-appointment-price mui-pull-left">100元</div>
+				</div>
+			</li>
+			{{/each}}
+		</ul>
+	</script>
+
+	<!--热门卡-->
+	<script type="text/html" id="tmp_cards">
+		<div class="app-seperate-view"></div>
+		<div class="app-header-view mui-table-view-cell mui-media">
+			<div>
+				<img style="margin-left: 15px;" class="home-header-lefticon mui-media-object mui-pull-left" src="../../img/home_header_leftactivity@2x.png" />
+				<div class="mui-media-object app-header-title mui-pull-left">热门卡</div>
+			</div>
+		</div>
+		<ul class="mui-table-view">
+			{{each result v i}}
+			<li class="mui-table-view-cell" id={{v}}>
+				<div class="activiy-content-media">
+					<img class="activity-content-img" src={{v.imgpath}}></img>
+					<div class="card-bottomtitle-content" style="">
+						<div class="card-option-view-left" id={{v}}>在线购卡</div>
+						<div class="card-option-sep"></div>
+						<div class="card-option-view-right" id={{v}}>实体卡激活</div>
+					</div>
+				</div>
+			</li>
+			{{/each}}
+		</ul>
+	</script>
+
+</html>

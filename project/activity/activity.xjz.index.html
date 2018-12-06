@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+	<!--小记者活动列表-->
+
+	<head>
+		<meta charset="utf-8">
+		<title>五方小金鹰</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link rel="stylesheet" type="text/css" href="../../css/mui.min.css" />
+		<link rel="stylesheet" type="text/css" href="../../js/lib/mescroll.min.css" />
+
+		<link rel="stylesheet" type="text/css" href="../../css/base.app.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/home.index.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/activity.xjz.index.css" />
+	</head>
+
+	<body>
+		<div class="mui-content mescroll" id="mescroll">
+			<ul class="mui-table-view" id="activityList">
+			</ul>
+		</div>
+	</body>
+
+	<!--脚本文件改变 尽量放在底部 异步加载的问题-->
+
+	<script src="../../js/lib/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../../js/lib/mui.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../../js/lib/mescroll.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../../js/lib/template.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../../js/require.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../../js/default.config.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript">
+			document.write('<script src="../../js/common/base.utils.js?v=' + Math.random() + '" type="text/javascript" charset="utf-8">' + '<' + '/script>');
+			document.write('<script src="../../js/common/request.js?v=' + Math.random() + '" type="text/javascript" charset="utf-8">' + '<' + '/script>');
+			document.write('<script src="../../js/app/card/activity.xjz.index.js?v=' + Math.random() + '" type="text/javascript" charset="utf-8">' + '<' + '/script>');
+	</script>
+	<!--模板-->
+	<script type="text/html" id="tmp_items">
+		{{each result v i}}
+		<li class="mui-table-view-cell" id="{{v}}">
+			<div class="activiy-content-media">
+				<img class="activity-content-img" src={{v.imgpath}} />
+				<div class="activiy-content-time">
+					活动时间：{{v.start_time}}{{v.time_desc}}
+				</div>
+			</div>
+			<div class="activiy-content-title">
+				<span>{{v.title}}</span>
+				<div class="activiy-appointment-btn mui-pull-right">
+					预约
+				</div>
+			</div>
+		</li>
+		{{/each}}
+
+	</script>
+
+</html>

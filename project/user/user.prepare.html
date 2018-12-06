@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>我的预约</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<!--标准mui.css-->
+		<link rel="stylesheet" href="../../css/mui.min.css">
+		<link rel="stylesheet" type="text/css" href="../../js/lib/mescroll.min.css" />
+
+		<!--App自定义的css-->
+		<link rel="stylesheet" type="text/css" href="../../css/base.app.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/myorder.css" />
+
+		<style>
+			.mui-control-content .mui-loading {
+				margin-top: 150px;
+			}
+			
+			.user-order-title {
+				color: black;
+				font-size: 14px;
+			}
+			
+			.user-order-orderno {
+				color: #FC1500;
+				font-size: 12px;
+			}
+			
+			.user-order-people {
+				font-size: 12px;
+				height: 20px;
+				line-height: 20px;
+			}
+			
+			.user-order-content {
+				display: flex;
+				flex-direction: column;
+				justify-content: space-between;
+				height: 98px;
+				display: -webkit-flex;
+				-webkit-flex-direction: column;
+				-webkit-justify-content: space-between;
+			}
+		</style>
+
+	</head>
+
+	<body>
+		<div class="mui-content mescroll" id="mescroll">
+			<ul class="mui-table-view" id="prepare">
+
+			</ul>
+		</div>
+	</body>
+
+	<script src="../../js/lib/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../../js/lib/mui.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../../js/lib/template.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../../js/lib/mescroll.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../../js/require.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../../js/default.config.js" type="text/javascript" charset="utf-8"></script>
+	
+	<script type="text/javascript">
+		document.write('<script src="../../js/common/base.utils.js?v=' + Math.random() + '" type="text/javascript" charset="utf-8">' + '<' + '/script>');
+		document.write('<script src="../../js/common/request.js?v=' + Math.random() + '" type="text/javascript" charset="utf-8">' + '<' + '/script>');
+		document.write('<script src="../../js/app/user/user.prepare.js?v=' + Math.random() + '" type="text/javascript" charset="utf-8">' + '<' + '/script>');
+	</script>
+	
+	<script type="text/html" id="tmp_order_unpay">
+		{{ each result v i}}
+		<li class="mui-table-view-cell mui-media" id="{{v}}">
+			<img class="mui-media-object mui-pull-left" src={{v.imgpath}}>
+
+			<div class="user-order-content">
+				<div class="mui-media-body">
+					<div class="mui-ellipsis user-order-title">{{v.name}}</div>
+					<div class="mui-ellipsis user-order-orderno">订单号：{{v.order_sn}}</div>
+				</div>
+
+				<div class="mui-media-body">
+				    {{if v.order_type==3 }}
+					<div class="user-order-people">陪同人数：{{v.amount}}</div>
+					{{ else }}
+					<div class="user-order-people">购买份数：{{v.amount}}份</div>
+					{{ /if }}
+				</div>
+			</div>
+		</li>
+		{{ /each}}
+	</script>
+
+</html>

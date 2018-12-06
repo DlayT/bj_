@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>我的收藏</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link rel="stylesheet" type="text/css" href="../../css/mui.min.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/base.app.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/home.index.css" />
+		<style type="text/css">
+			.mui-table-view-cell {
+				padding: 11px 0px;
+			}
+		</style>
+
+	</head>
+
+	<body>
+		<div class="mui-content">
+			<ul class="mui-table-view" id="list">
+				
+			</ul>
+		</div>
+	</body>
+
+	<script src="../../js/lib/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../../js/lib/mui.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../../js/lib/mui.pullToRefresh.js"></script>
+	<script src="../../js/lib/mui.pullToRefresh.material.js"></script>
+	<script src="../../js/lib/template.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../../js/common/base.utils.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../../js/common/request.js" type="text/javascript" charset="utf-8"></script>
+
+	<script src="../../js/require.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../../js/default.config.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../../js/app/user/user.collection.js" type="text/javascript" charset="utf-8"></script>
+	
+	<script type="text/html" id="tmp_collect">
+		{{each result v i}}
+		<li class="mui-table-view-cell">
+			<div class="activiy-content-media">
+				<img class="activity-content-img" src="../../img/activity_example.png" />
+				<div class="activiy-content-time">
+					预订截止时间：2018年3月25日
+				</div>
+			</div>
+			<div class="activiy-content-title">
+				{{v.title}}
+			</div>
+			<div class="activiy-content-venueprice mui-pull-left">
+				总价：100元 | 订金：50元
+			</div>
+
+			<div class="activiy-content-appointment mui-pull-right">
+				<div class="activiy-appointment-btn mui-pull-right">
+					预定
+				</div>
+				<div class="activiy-appointment-price mui-pull-left">
+					100元
+				</div>
+			</div>
+		</li>
+		{{/each}}
+	</script>
+
+</html>

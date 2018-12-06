@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link rel="stylesheet" type="text/css" href="../../css/mui.min.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/base.app.css" />
+		<style type="text/css">
+			.app-view-center {
+				flex-direction: column;
+			}
+			
+			.mui-progressbar span {
+				background-color: black;
+			}
+			
+			.update-progressbar {
+				background-color: #4cd964;
+			}
+		</style>
+
+	</head>
+
+	<body>
+		<div class="mui-content mui-fullscreen app-view-center" style="background-color: white;">
+
+			<div class="app-view-center" style="text-align: center;width: 100px;height: 100px;border-radius: 50px;border: black 1px solid;color:black;">
+				<div style="margin-top: 20px;" id="msg">正在更新</div>
+				<div style="font-size: 14px" id="progresspct"></div>
+			</div>
+
+			<div id="update-progressbar" style="height: 30px;width: 250px;margin-top: 30px;">
+				<p style="height: 2px;">
+
+				</p>
+			</div>
+		</div>
+	</body>
+
+	<!--脚本文件改变 尽量放在底部 异步加载的问题-->
+
+	<script src="../../js/lib/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../../js/lib/mui.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../../js/lib/template.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../../js/lib/progressbar.min.js" type="text/javascript" charset="utf-8"></script>
+	
+		<script type="text/javascript">
+			document.write('<script src="../../js/common/base.utils.js?v=' + Math.random() + '" type="text/javascript" charset="utf-8">' + '<' + '/script>');
+			document.write('<script src="../../js/common/request.js?v=' + Math.random() + '" type="text/javascript" charset="utf-8">' + '<' + '/script>');
+	</script>
+	<!--模板-->
+	<script type="text/javascript">
+		mui.plusReady(function() {
+			var web = plus.webview.currentWebview();
+			var wgtUrl = web.wgt_url;
+			if(wgtUrl) {
+				//下载资源包
+				downWgt(wgtUrl);
+			}
+		})
+
+		// 下载wgt文件
+		var dtask = null;
+
+		function downWgt(wgtUrl) {
+			dtask = plus.downloader.createDownload(wgtUrl, {
+				filename: "_doc/update/",
+				method: "GET"
+			}, function(task, status) {
+				if(status == 200) {
+					installWgt(task.filename); // 安装wgt包
+				} else {
+					console.log("下载wgt失败！");
+				}
+			});
+			dtask.start();
+
+			dtask.addEventListener("statechanged", function(task, status) {
+				if(!dtask) {
+					return;
+				}
+				switch(task.state) {
+					case 1: // 开始
+						console.log("开始到服务器... ");
+						break;
+					case 2: // 已连接到服务器
+						console.log("链接到服务器...");
+						createProgressBar();
+						break;
+					case 3: // 已接收到数据
+						{
+							var container = mui("#update-progressbar p");
+							var progress = task.downloadedSize / task.totalSize * 100;
+							setTimeout(function() {
+								simulateLoading(container, progress);
+								$('#progresspct').html(parseInt(progress) + '%');
+							}, Math.random() * 200 + 200);
+							break;
+						}
+
+					case 4: // 下载完成
+						break;
+				}
+			});
+		}
+
+		// 更新应用资源
+		function installWgt(path) {
+			$('#msg').html('安装更新中');
+			plus.runtime.install(path, {
+
+			}, function() {
+				setTimeout(function() {
+					plus.nativeUI.alert("资源更新完成\n", function(e) {
+						plus.runtime.restart();
+					}, "百纪成长", "立即重启");
+				}, 1000);
+
+			}, function(e) {
+				//安装失败
+				wflog(e);
+			});
+		}
+
+		function createProgressBar() {
+			console.log('创建进度条')
+			var container = mui("#update-progressbar p");
+			if(container.progressbar({
+					progress: 0
+				}).show()) {
+				simulateLoading(container, 0);
+			}
+		}
+
+		/**
+		 * 通过随机数模拟业务进度，真实业务中需根据实际进度修改
+		 * @param {Object} container
+		 * @param {Object} progress
+		 */
+		function simulateLoading(container, progress) {
+			if(typeof container === 'number') {
+				progress = container;
+				container = 'body';
+			}
+			mui(container).progressbar().setProgress(progress);
+			if(progress >= 100) {
+				mui(container).progressbar().hide();
+				console.log('progress' + progress);
+				$('#progresspct').html('100%');
+				//				plus.nativeUI.alert("资源包更新成功\n需要重新启动", function(e) {
+				//
+				//				}, "提示", "好");
+			}
+		}
+	</script>
+
+</html>

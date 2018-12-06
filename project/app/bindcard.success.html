@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>激活成功</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link rel="stylesheet" type="text/css" href="../../css/mui.min.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/base.app.css" />
+
+		<style type="text/css">
+			.app_empty_view {
+				display: flex;
+				display: -webkit-flex;
+				flex-direction: column;
+				-webkit-flex-direction: column;
+				align-items: center;
+				justify-content: center;
+				-webkit-align-items: center;
+				-webkit-justify-content: center;
+			}
+			
+			.app_empty_view img {
+				margin-top: -120px;
+				width: 54px;
+				height: 54px;
+			}
+			
+			.app_empty_tittle {
+				margin-top: 5px;
+				font-size: 16px;
+			}
+			
+			.app_empty_subtitle {
+				margin-top: 5px;
+				font-size: 12px;
+			}
+			
+			.mui-btn {
+				margin-top: 10px;
+				padding: 10px 85px;
+			}
+		</style>
+
+	</head>
+
+	<body>
+		<div class="mui-content mui-fullscreen app_empty_view">
+			<img src="../../img/pay_success.png" />
+			<div class="app_empty_tittle">
+				激活成功成功
+			</div>
+			<div class="app_empty_subtitle">
+				去预约大量优质场馆吧
+			</div>
+			<button id="returnOrder" type="button" class="mui-btn mui-btn-blue">查看场馆</button>
+		</div>
+	</body>
+
+	<!--脚本文件改变 尽量放在底部 异步加载的问题-->
+
+	<script src="../../js/lib/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../../js/lib/mui.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../../js/lib/template.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../../js/require.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../../js/default.config.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			document.write('<script src="../../js/common/base.utils.js?v=' + Math.random() + '" type="text/javascript" charset="utf-8">' + '<' + '/script>');
+			document.write('<script src="../../js/common/request.js?v=' + Math.random() + '" type="text/javascript" charset="utf-8">' + '<' + '/script>');
+	</script>
+	<script type="text/javascript">
+		$('#returnOrder').on('tap', function(event) {
+//			backToHomePage();
+			
+		})
+	</script>
+
+</html>

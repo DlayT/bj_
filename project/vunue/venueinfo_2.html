@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+	<!--从卡的场馆列表进入的时候，不可预约场馆-->
+
+	<head>
+		<meta charset="utf-8">
+		<title>场馆介绍</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link rel="stylesheet" type="text/css" href="../../css/mui.min.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/base.app.css" />
+
+		<style type="text/css">
+			.price_left {
+				width: 50%;
+				line-height: 49px;
+				font-size: 16px;
+				text-align: center;
+				float: left;
+			}
+			
+			.price_left span {
+				color: #fc1520;
+			}
+			
+			.price_left1 {
+				float: left;
+				width: 50%;
+				line-height: 49px;
+				font-size: 16px;
+				text-align: center;
+				color: #FFFFFF;
+				background-color: #009BFD;
+			}
+			
+			.address-icon {
+				position: relative;
+				top: 5px;
+			}
+			
+			.venue-postion-view {
+				display: flex;
+				display: -webkit-flex;
+				flex-direction: row;
+				-webkit-flex-direction: row;
+				justify-content: space-between;
+				-webkit-justify-content: space-between;
+			}
+			/*导航*/
+			
+			.venue-postion-nav {
+				display: flex;
+				display: -webkit-flex;
+				flex-direction: column;
+				-webkit-flex-direction: column;
+				width: 80px;
+				height: 74px;
+				justify-content: center;
+				-webkit-justify-content: center;
+				align-items: center;
+				-webkit-align-items: center;
+			}
+			
+			.venue-postion-info {
+				display: flex;
+				display: -webkit-flex;
+				flex-direction: column;
+				-webkit-flex-direction: column;
+				flex: 1;
+				-webkit-flex: 1;
+				margin-left: 8px;
+				margin-top: 5px;
+			}
+			
+			#venuecontent img {
+				max-width: 100%;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div class="mui-content mui-hidden">
+			<div style="position: relative;">
+				<img id="venuepic" style="width: 100%;" src="" />
+				<div style="position:absolute;width: 100%;height: 30px;background-color: rgba(0,0,0,.4);bottom: 6px;text-align: center;">
+					<span id="venuedate" style="color: white;line-height:30px;">预约开始时间：</span>
+				</div>
+			</div>
+
+			<div class="venue-postion-view">
+				<div class="venue-postion-info">
+					<span id="vunenName" style="font-size: 16px;color: #272727;"></span>
+					<span id="venueAddressTop" style="font-size: 12px;color: #808080;margin-top: 5px;"></span>
+				</div>
+				<div style="background-color: #F1F1F1;width: 1px;"></div>
+				<div id="navigationBtn" class="venue-postion-nav">
+					<img style="width: 42px;height: 26px;" src="../../img/icon_address_navigation.png" />
+					<span style="font-size: 12px;color: #808080;">地址导航</span>
+				</div>
+			</div>
+
+			<div style="background-color: #F1F1F1;width: 100%;height: 1px;"></div>
+			<div style="padding-top: 10px; padding-bottom: 50px;margin-left: 5px;">
+				<span id="venuecontent" style="font-size: 12px;color: #272727;margin-top: 10px;">
+				</span>
+				<div style="margin-bottom: 10px;display: none;">
+					<div id="venueNavigation">
+						<span style="font-size: 14px;color: #009BFD;">场馆地址：</span>
+						<img class="address-icon" style="width: 20px;" src="../../img/icon_address.png" />
+						<span id="venueAddress" style="font-size: 12px;color: #009BFD;"></span>
+					</div>
+					<div id="callVenue" style="font-size: 14px;color: #009BFD;">客服咨询：<span style="font-size: 12px;color: #009BFD;">0731-96255</span></div>
+				</div>
+			</div>
+
+			<div id="picker" class="mui-popover mui-popover-action mui-popover-bottom">
+				<ul class="mui-table-view">
+					<!--<li class="mui-table-view-cell">
+						<a href="#">苹果地图</a>
+					</li>-->
+					<li class="mui-table-view-cell">
+						<a href="#">高德地图</a>
+					</li>
+					<li class="mui-table-view-cell">
+						<a href="#">百度地图</a>
+					</li>
+				</ul>
+				<ul class="mui-table-view">
+					<li class="mui-table-view-cell">
+						<a href="#picker">取消</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</body>
+
+	<script src="../../js/lib/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../../js/lib/mui.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../../js/lib/template.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../../js/common/utils.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../../js/require.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../../js/default.config.js" type="text/javascript" charset="utf-8"></script>
+
+	<script type="text/javascript">
+		document.write('<script src="../../js/common/base.utils.js?v=' + Math.random() + '" type="text/javascript" charset="utf-8">' + '<' + '/script>');
+		document.write('<script src="../../js/common/request.js?v=' + Math.random() + '" type="text/javascript" charset="utf-8">' + '<' + '/script>');
+		document.write('<script src="../../js/app/venue/venueinfo_2.js?v=' + Math.random() + '" type="text/javascript" charset="utf-8">' + '<' + '/script>');
+	</script>
+
+</html>

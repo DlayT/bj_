@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>提交退款</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link rel="stylesheet" type="text/css" href="../../css/mui.min.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/base.app.css" />
+
+		<style type="text/css">
+			.refund-apply-title {
+				background-color: white;
+				min-height: 44px;
+				line-height: 44px;
+				width: 100%;
+				color: #262626;
+				padding: 0px 15px;
+			}
+			
+			.refund-apply-group {
+				background-color: white;
+			}
+			
+			.refund-apply-content {
+				padding: 0px 10px 11px 10px;
+				font-size: 12px;
+			}
+			
+			.refund-apply-tipcontent {
+				height: 50px;
+				display: flex;
+				display: -webkit-flex;
+				align-items: center;
+				-webkit-align-items: center;
+			}
+			
+			.refund-apply-tip {
+				background-color: #009BFD;
+				color: white;
+				height: 30px;
+				padding: 0px 15px;
+				font-size: 14px;
+				display: inline-block;
+				line-height: 30px;
+				border-bottom-right-radius: 12px;
+			}
+			
+			.refund-apply-orderinfo {
+				padding: 0px 10px 11px 10px;
+				font-size: 12px;
+				display: flex;
+				display: -webkit-flex;
+				flex-direction: row;
+				-webkit-flex-direction: row;
+				justify-content: space-between;
+				-webkit-justify-content: space-between;
+				align-items: center;
+				-webkit-align-items: center;
+			}
+		</style>
+
+	</head>
+
+	<body>
+		<div class="mui-content mui-hidden app-basegray-bgcolor" style="padding-bottom: 69px;">
+			<div class="refund-apply-title" id="venue_name"></div>
+			<div class="app-seperate-view"> </div>
+
+			<!--<div class="refund-apply-group">
+				<div class="refund-apply-tipcontent ">
+					<div class="refund-apply-tip" style="height: 30px;">
+						退款规则
+					</div>
+				</div>
+				<div class="refund-apply-content">
+					电子门票一经验证，概不退款，概不延期。儿童票至少绑定一个陪同票。
+				</div>
+			</div>-->
+
+			<!--<div class="app-seperate-view"> </div>-->
+			<div class="refund-apply-group">
+				<div class="refund-apply-tipcontent ">
+					<div class="refund-apply-tip" style="height: 30px;">
+						退款内容与金额
+					</div>
+				</div>
+				<div class="refund-apply-orderinfo">
+					<div class="" style="margin-left: 10px;">
+						儿童票数：<span id="childNum">1</span>
+					</div>
+					<div class="">
+						成人票数：<span id="adultNum">5</span>
+					</div>
+					<div class="" style="color: red;margin-right: 10px;">
+						￥<span id="total">5</span>
+					</div>
+				</div>
+			</div>
+
+			<div class="app-seperate-view"> </div>
+			<div class="refund-apply-group">
+				<div class="refund-apply-tipcontent ">
+					<div class="refund-apply-tip" style="height: 30px;">
+						现金退款方式
+					</div>
+				</div>
+				<div class="refund-apply-content">
+					原路返还（1~7个工作日内退款到原支付方式）
+				</div>
+			</div>
+
+			<div class="app-seperate-view"> </div>
+			<div class="refund-apply-group">
+				<div class="refund-apply-tipcontent ">
+					<div class="refund-apply-tip" style="height: 30px;">
+						请填写退款原因
+					</div>
+				</div>
+				<div class="refund-apply-content">
+					<div class="mui-input-row">
+						<textarea id="textarea" rows="5" placeholder="退款原因" style="padding: 5px 5px;"></textarea>
+					</div>
+				</div>
+			</div>
+
+			<div class="app-footer-bluebar">
+				申请退款
+			</div>
+		</div>
+	</body>
+
+	<!--脚本文件改变 尽量放在底部 异步加载的问题-->
+
+	<script src="../../js/lib/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../../js/lib/mui.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../../js/lib/template.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../../js/require.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../../js/default.config.js" type="text/javascript" charset="utf-8"></script>
+	
+	<script type="text/javascript">
+			document.write('<script src="../../js/common/base.utils.js?v=' + Math.random() + '" type="text/javascript" charset="utf-8">' + '<' + '/script>');
+			document.write('<script src="../../js/common/request.js?v=' + Math.random() + '" type="text/javascript" charset="utf-8">' + '<' + '/script>');
+			document.write('<script src="../../js/app/order/order.refund.select.js?v=' + Math.random() + '" type="text/javascript" charset="utf-8">' + '<' + '/script>');
+	</script>
+</html>

@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>我的</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link rel="stylesheet" type="text/css" href="../../css/mui.min.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/base.app.css" />
+		<style type="text/css">
+			
+		</style>
+	</head>
+
+	<body>
+		<div class="mui-content">
+			<div class="user-header mui-row">
+				<div class="user-content-parent">
+					<img id="userAvator" class="user-header-icon person-header-icon" src="../../img/user_default@2x.png" />
+					<div class="user-header-title" id="user-nick">未登陆</div>
+				</div>
+
+				<div id="user-message" class="mui-row" style="background-color: white;">
+					<div id="myPrepare" align="center" class="mui-table-view-cell msg-item mui-col-sm-3">
+						<img src="../../img/my_info@2x.png" />
+						<div class="" style="color: #262626;font-size: 15px;">我的预约</div>
+					</div>
+					<div id="myYearCard" align="center" class="mui-table-view-cell msg-item mui-col-sm-3">
+						<img src="../../img/my_card@2x.png" />
+						<div class="" style="color: #262626;font-size: 15px;">我的卡包</div>
+					</div>
+					<div id="myMessage" align="center" class="mui-table-view-cell msg-item mui-col-sm-3 mui-text-center">
+						<img src="../../img/my_msg@2x.png" />
+						<div class="" style="color: #262626;font-size: 15px;">我的消息</div>
+					</div>
+				</div>
+
+				<ul class="mui-table-view">
+					<li id="myOrder" class="mui-table-view-cell">
+						<img src="../../img/icon_order@2x.png" />
+						<span class="mui-navigate-right" style="margin-left: 10px;">我的订单</span>
+					</li>
+					<li id="bind-card" class="mui-table-view-cell">
+						<img src="../../img/icon_bindcard.png" />
+						<span class="mui-navigate-right" style="margin-left: 10px;">激活百纪卡</span>
+					</li>
+					<li id="personalmsgBtn" class="mui-table-view-cell">
+						<img src="../../img/icon_personl_message.png" />
+						<span class="mui-navigate-right" style="margin-left: 10px;">我的资料</span>
+					</li>
+					<li id="question" class="mui-table-view-cell">
+						<img src="../../img/icon_question.png" />
+						<span class="mui-navigate-right" style="margin-left: 10px;">常见问题</span>
+					</li>
+					<!--<li id="myAddress" class="mui-table-view-cell">
+						<img src="../../img/icon_address@2x.png" />
+						<span class="mui-navigate-right">收货地址</span>
+					</li>-->
+					<!--<li id="myCollect" class="mui-table-view-cell">
+						<img src="../../img/icon_collect@2x.png" />
+						<span class="mui-navigate-right">我的收藏</span>
+					</li>-->
+
+					<li id="callService" class="mui-table-view-cell">
+						<img src="../../img/icon_guset@2x.png">
+						<span class="mui-navigate-right">联系客服</span>
+					</li>
+
+					<!--<li class="mui-table-view-cell" onclick="toComment()">
+						<img src="../../img/icon_comment@2x.png">
+						<span class="mui-navigate-right">我的评价</span>
+					</li>-->
+
+					<li class="mui-table-view-cell" onclick="bjcz()">
+						<img src="../../img/icon_about.png">
+						<span class="mui-navigate-right">关于百纪</span>
+					</li>
+					<li id="updatecell" class="mui-table-view-cell">
+						<img src="../../img/icon_update.png">
+						<span class="mui-navigate-right">检查更新</span>
+					</li>
+				</ul>
+
+				<ul class="mui-table-view">
+					<li class="mui-table-view-cell" onclick="clearCache()">
+						<img src="../../img/icon_clean.png">
+						<span class="mui-navigate-right">清除缓存</span>
+					</li>
+					<div class="app-seperate-view"></div>
+				</ul>
+			</div>
+		</div>
+	</body>
+	<script src="../../js/lib/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../../js/lib/mui.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../../js/lib/template.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../../js/common/base.utils.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../../js/common/request.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../../js/require.js" type="text/javascript" charset="utf-8"></script>
+
+	<script src="../../js/user.config.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../../js/app/user/user.index.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript" charset="utf-8">
+		function clearCache() {
+			mui.confirm('清除缓存成功', '提示');
+			//			pushToController('../vunue/consumer-package.html', '选择套餐');
+		}
+
+		window.addEventListener('bj_logout', function(event) {
+			console.log('我的页面事件接收');
+			wflog(event.detail);
+		})
+
+		window.addEventListener('bj_signal_useinfochanged', function(event) {
+			console.log('收到用户改变的事件');
+			wflog(event.detail);
+			location.reload();
+		})
+
+		/**
+		 * 我的评论
+		 */
+		//		function toComment() {
+		//			mui.openWindow({
+		//				url: 'barcode_scan.html',
+		//				id: 'barcode_scan.html',
+		//			});
+		//		}
+
+		/**
+		 * 联系客服
+		 */
+		$("#callService").on('click', function() {
+			if(plus.os.name == 'Android') {
+				console.log('android打电话。。。');
+				var Intent = plus.android.importClass("android.content.Intent");
+				var Uri = plus.android.importClass("android.net.Uri");
+				var main = plus.android.runtimeMainActivity();
+				var uri = Uri.parse("tel:073196255");
+				var call = new Intent("android.intent.action.CALL", uri);
+				main.startActivity(call);
+			} else {
+				console.log('ios打电话。。。');
+				var UIAPP = plus.ios.importClass("UIApplication");
+				var NSURL = plus.ios.importClass("NSURL");
+				var app = UIAPP.sharedApplication();
+				app.openURL(NSURL.URLWithString("tel://" + 96255));
+			}
+		})
+
+		function bjcz() {
+			pushToUrlController('http://bjcz.app.wufangedu.com:18081/WFvendition/design/book/index.html', '关于我们');
+		}
+	</script>
+
+</html>

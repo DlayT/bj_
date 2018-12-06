@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>场馆预约</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link rel="stylesheet" type="text/css" href="../../css/mui.min.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/mui.picker.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/base.app.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/home.index.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/myorder.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/venue.prepare.css" />
+		<style type="text/css">
+            .mui-btn{
+                padding: 0;
+                border: none;
+                border-radius: 0;
+            }
+		</style>
+	</head>
+
+	<body>
+		<div class="mui-content">
+			<ul class="mui-table-view" id="orderinfo"></ul>
+			<div class="app-seperate-view" style="height: 1px;background-color: #c8c7cc;"></div>
+			<div class="choice-dtae" data-options='{"type":"date"}' style=" position: relative; height: 40px;background-color: white;">
+				<span class="mylable" style="margin-left: 18px;vertical-align: middle;text-align: center;line-height: 40px;">预定日期：</span>
+				<span id="date" style="height: 100%;margin-left: 8px;line-height: 40px;"></span>
+				<img style="width: 18px;height: 18px;position: absolute;right: 8px;top: 11px;" src="../../img/icon_date.png" />
+			</div>
+			<div class="app-seperate-view"></div>
+
+			<div id="hotplaceheader" class="app-header-view mui-table-view-cell mui-media">
+				<div class="">
+					<img class="home-header-lefticon mui-media-object mui-pull-left" src="../../img/venue_prepare_cardicon@2x.png" />
+					<div class="mui-media-object app-header-title mui-pull-left" style="color: #009BFD;font-size: 16px;">
+						选择包含此场馆的卡
+					</div>
+				</div>
+			</div>
+			<div id="related_card">
+				<ul class="mui-table-view mui-table-view-radio" id="related_card_table">
+				</ul>
+			</div>
+
+			<div class="app-seperate-view"></div>
+
+			<div class="pay-way-header">
+				<div id="" style="margin-left: 15px;">
+					支付方式
+				</div>
+			</div>
+
+			<ul class="mui-table-view mui-table-view-radio" id="payway">
+				<li class="mui-table-view-cell mui-media  mui-selected" id="wxpay">
+					<div class="mui-navigate-right">
+						<img class="mui-pull-left" src="../../img/pay_weixin@2x.png">
+						<div class="pay-way-name">
+							微信支付
+						</div>
+					</div>
+
+				</li>
+				<!--<li class="mui-table-view-cell mui-media" id="alipay">
+					<div class="mui-navigate-right iconfont icon-selected">
+						<img class="mui-pull-left" src="../../img/pay_zhifubao@2x.png">
+						<div class="pay-way-name">
+							支付宝支付
+						</div>
+					</div>
+				</li>-->
+			</ul>
+
+			<div style="position: fixed;bottom: 0;width: 100%;background-color: #fff;" class="price">
+				<div id="card-price" class="price_left">订单总价：<span id="pricetotal">¥0.00元</span></div>
+				<div id="payBtn" class="price_left1 mui-btn">立即预约</div>
+			</div>
+		</div>
+		
+		<!--
+		<div class="mui-content mui-fullscreen app-view-center" style="background: white" id="loadview">
+		  <span class="mui-icon mui-spinner"></span>
+		</div>
+		
+		<div class="mui-content mui-fullscreen app-view-center" style="background: white" id="empty">
+		  	<div class="">
+		  		<img class="app-view-empty" src="../../img/empty_default.png"/>
+		  		<div id="" style="text-align: center;color: #E8E8E8;">
+		  			暂无数据
+		  		</div>
+		  	</div>
+		</div>-->
+	</body>
+
+	<script src="../../js/lib/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../../js/lib/mui.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../../js/lib/mui.picker.min.js" type="text/javascript" charset="UTF-8"></script>
+	<script src="../../js/lib/template.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../../js/common/utils.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../../js/require.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../../js/default.config.js" type="text/javascript" charset="utf-8"></script>
+
+	<script type="text/javascript">
+		document.write('<script src="../../js/common/base.utils.js?v=' + Math.random() + '" type="text/javascript" charset="utf-8">' + '<' + '/script>');
+		document.write('<script src="../../js/common/request.js?v=' + Math.random() + '" type="text/javascript" charset="utf-8">' + '<' + '/script>');
+		document.write('<script src="../../js/app/venue/venue.prepare.js?v=' + Math.random() + '" type="text/javascript" charset="utf-8">' + '<' + '/script>');
+	</script>
+
+	<script type="text/html " id="tmp_related_card_table">
+		{{each result v i}}
+		 {{if i==0}}
+		<li class="mui-table-view-cell mui-media mui-selected " onclick="onSelectCard( '{{v}}') ">
+			<div class="mui-navigate-right ">
+				<div class="mui-media-object mui-pull-left " style="position: relative; width: 90px;height: 55px; ">
+					<img src={{v.thumb}} >
+					{{if v.is_buy == 1}} 
+						<img src="../../img/card_buyed@2x.png "/ style="position:absolute ;width: 33px;height: 28px;top: 0;left: 0;padding: 0; ">
+					{{else}}
+						<img src="../../img/card_unbuy@2x.png "/ style="position:absolute ;width: 33px;height: 28px;top: 0;left: 0;padding: 0; ">
+					{{/if}}
+				</div>
+				<div class="venue-card-list ">
+					<div class="mui-ellipsis venue-card-title ">
+						{{v.name}}
+					</div>
+					<div class="mui-ellipsis-2 venue-card-intro ">
+						{{v.instr}}
+					</div>
+				</div>
+			</div>
+		</li>
+		{{else}}
+		<li class="mui-table-view-cell mui-media " onclick="onSelectCard( '{{v}}') ">
+			<div class="mui-navigate-right ">
+				<div class="mui-media-object mui-pull-left " style="position: relative; width: 90px;height: 55px; ">
+					<img src={{v.thumb}} >
+					{{if v.is_buy == 1}} 
+						<img src="../../img/card_buyed@2x.png "/ style="position:absolute ;width: 33px;height: 28px;top: 0;left: 0;padding: 0; ">
+					{{else}}
+						<img src="../../img/card_unbuy@2x.png "/ style="position:absolute ;width: 33px;height: 28px;top: 0;left: 0;padding: 0; ">
+					{{/if}}
+				</div>
+				<div class="venue-card-list ">
+					<div class="mui-ellipsis venue-card-title ">
+						{{v.name}}
+					</div>
+					<div class="mui-ellipsis-2 venue-card-intro ">
+						{{v.instr}}
+					</div>
+				</div>
+			</div>
+		</li>
+		{{/if}}
+		{{/each}}
+	</script>
+
+
+	<script type="text/html" id="tmp_orderinfo">
+		{{set venue = result}}
+		<li class="mui-table-view-cell mui-media" id="{{v}}">
+			<img class="mui-media-object mui-pull-left" src={{venue.thumb}}>
+			<div class="user-order-content">
+				<div class="mui-media-body">
+					<div class="mui-ellipsis user-order-title">{{venue.name}}</div>
+					<!--	<div class="mui-ellipsis user-order-orderno">预约时间：12133131</div>-->
+				</div>
+
+				<div class="mui-media-body">
+
+					<div class="user-student-info">
+						<div class="user-order-people">学生人数：</span>
+						</div>
+						<div class="user-order-people">1</div>
+						{{if venue.is_buy == 1}}
+						<div class="user-order-people"><span style="color:#FC1520 ;">￥{{venue.price}}元 </span></div>
+						{{else}}
+						<div class="user-order-people"><span style="color:#FC1520 ;">免费</span></div>
+						{{/if}}
+					</div>
+
+					<div class="user-order-accompany">
+						<div class="user-order-people" style="">
+							陪同人数：
+						</div>
+
+						<div class="mui-numbox user-order-people" style="width:80px; height: 20px;background: green;" data-numbox-min='1' data-numbox-max='9'>
+							<button class="mui-btn mui-btn-numbox-minus" type="button" onclick="subAccompanyPeople()" style="line-height: 20px;">-</button>
+							<input id="numbox_input" class="mui-input-numbox" type="number" value="1" style="font-size: 12px;line-height: 20px; data-price=" 100 " data-value="0 " />
+							<button class="mui-btn mui-btn-numbox-plus " type="button " onclick="addAccompanyPeople() " style=" ">+</button>
+						</div>
+						
+						<div class="user-order-people "><span style="color:#FC1520 ; ">￥{{venue.price}}元 </span></div>
+
+					</div>
+				</div>
+		</li>
+	</script> 
+</html>

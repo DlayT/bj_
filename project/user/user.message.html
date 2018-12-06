@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta charset="utf-8">
+		<title>消息中心</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link rel="stylesheet" type="text/css" href="../../css/mui.min.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/base.app.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/user.message.css" />
+		<link rel="stylesheet" type="text/css" href="../../js/lib/mescroll.min.css"/>
+	</head>
+
+	<body >
+		<div class="mui-content mescroll" id="mescroll">
+			<ul class="mui-table-view" id="prepare">
+				
+			</ul>
+		</div>
+	</body>
+
+	<script src="../../js/lib/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../../js/lib/mui.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../../js/lib/template.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../../js/lib/mescroll.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../../js/require.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../../js/default.config.js" type="text/javascript" charset="utf-8"></script>
+	
+	<script type="text/javascript">
+			document.write('<script src="../../js/common/base.utils.js?v=' + Math.random() + '" type="text/javascript" charset="utf-8">' + '<' + '/script>');
+			document.write('<script src="../../js/common/request.js?v=' + Math.random() + '" type="text/javascript" charset="utf-8">' + '<' + '/script>');
+			document.write('<script src="../../js/app/user/user.message.js?v=' + Math.random() + '" type="text/javascript" charset="utf-8">' + '<' + '/script>');
+	</script>
+	
+	<script type="text/html" id="tmp_order_unpay">
+		{{ each result v i}}
+		<li class="mui-table-view-cell mui-media">
+			<!--暂时不要滑动删除的效果-->
+			<!--<div class="mui-slider-right mui-disabled">
+				<a class="mui-btn mui-btn-red">删除</a>
+			</div>-->
+			<div class="mui-slider-handle" style="width: 100%;">
+				<img class="mui-media-object mui-pull-left message-left-icon" src="../../img/user_message_aboutus@2x.png">
+				<div class="" style="width: 100%;">
+					<div class="message-title">
+						{{v.title}}
+						<div class="mui-pull-right message-time">
+							{{v.add_time}}
+						</div>
+					</div>
+					<div class="mui-ellipsis-2 message-subtitle">
+						{{v.content}}
+					</div>
+				</div>
+			</div>
+		</li>
+		{{ /each}}
+	</script>
+
+</html>

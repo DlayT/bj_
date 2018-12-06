@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>搜索场馆活动</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link rel="stylesheet" type="text/css" href="../../css/mui.min.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/base.app.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/home.index.css" />
+		<style type="text/css">
+			.mui-bar {
+				-webkit-box-shadow: 0 0 0px rgba(0, 0, 0, .85);
+				box-shadow: 0 0 0px rgba(241, 13, 13, 0.85);
+			}
+			
+			.search-header-bar {
+				display: flex;
+				display: -webkit-flex;
+				justify-content: space-between;
+				-webkit-justify-content: space-between;
+			}
+			
+			.mui-icon-mic-filled:before,
+			.mui-icon-speech:before {
+				color: #009BFD;
+			}
+			
+			.mui-icon-search:before {
+				color: #009BFD;
+			}
+			
+			.mui-input-row.mui-search.home-search-input.mui-active::before {
+				color: #009BFD;
+				opacity: 1;
+			}
+			
+			.mui-input-clear.mui-icon {
+				color: #009BFD;
+			}
+			
+			.mui-icon-clear:before,
+			.mui-icon-close-filled:before {
+				color: #009BFD;
+			}
+			
+			.home-search-input {
+				width: calc(100% - 44px);
+				margin-left: 10px;
+				margin-right: 10px;
+			}
+			
+			#place .mui-table-view-cell {
+				padding: 11px 0px;
+			}
+			
+			.mui-content {
+				margin-top: 20px;
+			}
+			
+			#hotKeyword:before {
+				height: 1px;
+			}
+			
+			.home-search-tag {
+				font-size: 14px;
+				color: #B7C4CB;
+				background: white;
+				margin: 10px 10px 0px 0px;
+				border: #B7C4CB solid 1px;
+				display: inline-block;
+				padding-left: 10px;
+				padding-right: 10px;
+				height: 30px;
+				line-height: 30px;
+				border-radius: 15px;
+				max-width: calc(100%);
+				overflow: hidden;
+				text-overflow: ellipsis;
+				white-space: nowrap;
+			}
+			
+			.home-search-tagcontent {
+				margin: 0px 10px 0px 10px;
+			}
+			/*和首页的不相同*/
+			
+			.home-search-input input {
+				background-color: rgba(255, 255, 255, .9);
+				box-shadow: 0 0px 0px rgba(0, 0, 0, 0.5);
+				/*opacity: 0.8;*/
+			}
+		</style>
+
+	</head>
+
+	<body>
+		<!--<div style="width:100%;position:fixed;top:0;left:0;">
+			<div class="app-status-config"></div>
+			<header class="mui-bar app-navbar-config" >
+				<form class="search-header-bar">
+					<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+					<div id="searchView" class="mui-input-row mui-search home-search-input">
+						<input id="search" type="search" class="mui-input-speech mui-input-clear" placeholder="搜索场馆" style="background: white;">
+					</div>
+					<button id="searchBtn" type="button" class="mui-btn  mui-btn-link mui-pull-right" style="color: white;">搜索</button>
+				</form>
+			</header>
+		</div>-->
+		<header class="mui-bar mui-bar-nav app-navbar-config" style="height: 64px;">
+			<div class="app-status-config"></div>
+			<form class="search-header-bar">
+				<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+				<div id="searchView" class="mui-input-row mui-search home-search-input">
+					<input id="search" type="search" class="mui-input-speech mui-input-clear" placeholder="搜索场馆" style="background: white;">
+				</div>
+				<button id="searchBtn" type="button" class="mui-btn  mui-btn-link mui-pull-right" style="color: white;">搜索</button>
+			</form>
+		</header>
+
+		<div class="mui-content" style="margin-top: 20px;">
+
+		</div>
+	</body>
+
+	<!--脚本文件改变 尽量放在底部 异步加载的问题-->
+
+	<script src="../../js/lib/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../../js/lib/mui.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../../js/lib/template.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../../js/require.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../../js/default.config.js" type="text/javascript" charset="utf-8"></script>
+		
+		<script type="text/javascript">
+		document.write('<script src="../../js/common/base.utils.js?v=' + Math.random() + '" type="text/javascript" charset="utf-8">' + '<' + '/script>');
+		document.write('<script src="../../js/common/request.js?v=' + Math.random() + '" type="text/javascript" charset="utf-8">' + '<' + '/script>');
+		document.write('<script src="../../js/app/home/home.search.js?v=' + Math.random() + '" type="text/javascript" charset="utf-8">' + '<' + '/script>');
+	</script>
+	<!--模板-->
+	<!--热门场馆-->
+	<script type="text/html" id="tmp_hotplacelist">
+		<ul class="mui-table-view" id="place">
+			{{each result v i}}
+			<li class="mui-table-view-cell" onclick="venueDetail({{v}})">
+				<div class="activiy-content-media">
+					<img class="activity-content-img" onerror="onerror=null;src='../../img/activity_example.png'" src={{v.imgpath}} />
+					<div class="activiy-content-time">
+						预约截止时间：{{v.end_time}}
+					</div>
+				</div>
+				<div class="activiy-content-title">
+					<span>{{v.title}}</span>
+					<div class="activiy-content-appointment mui-pull-right">
+						<div class="activiy-appointment-btn mui-pull-right">
+							预约
+						</div>
+						<div class="activiy-appointment-price mui-pull-left">
+							免费
+						</div>
+					</div>
+				</div>
+				<div class="activiy-content-venueprice mui-pull-left">
+					剩余可预约数量：{{v.reminder_quantity}}个
+				</div>
+			</li>
+			{{/each}}
+		</ul>
+	</script>
+
+	<script type="text/html" id="tmp_hotkeywords">
+		<div class="mui-fullscreen" style="margin-top: 64px;">
+			<div class="muibottom" style="height: 44px;line-height: 44px;margin-left: 15px;">
+				搜索热词
+			</div>
+			<div class="home-search-tagcontent">
+				{{each result v i}}
+				<span class="home-search-tag" onclick="clickHotKeyword({{v}})">{{v.word}}</span> {{/each}}
+			</div>
+		</div>
+	</script>
+
+	<script type="text/javascript">
+		mui.plusReady(function() {
+			plus.navigator.setStatusBarBackground("#009BFD");
+		})
+	</script>
+
+</html>

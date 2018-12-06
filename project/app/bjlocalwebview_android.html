@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link rel="stylesheet" type="text/css" href="../../css/mui.min.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/base.app.css" />
+
+		<style type="text/css">
+
+		</style>
+
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav app-navbar-config" style="height: 64px;">
+			<div class="app-status-config"></div>
+			<div>
+				<h1 id="title" class="mui-title">详情</h1>
+				<a class="mui-icon mui-icon-left-nav mui-pull-left" id="go_back"></a>
+				<div id="titl" class="mui-icon  mui-pull-left mui-action-back" id="go_back" style="font-size: 16px;line-height: 44px;padding-top: 1px;padding-bottom: 0px;padding-left:15px; color: white;
+				" id="close_page"> 关闭
+				</div>
+			</div>
+		</header>
+		<div class="mui-content">
+
+		</div>
+	</body>
+	<!--脚本文件改变 尽量放在底部 异步加载的问题-->
+
+	<script src="../../js/lib/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../../js/lib/mui.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../../js/common/utils.min.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			document.write('<script src="../../js/common/base.utils.js?v=' + Math.random() + '" type="text/javascript" charset="utf-8">' + '<' + '/script>');
+			document.write('<script src="../../js/common/request.js?v=' + Math.random() + '" type="text/javascript" charset="utf-8">' + '<' + '/script>');
+	</script>
+	<!--模板-->
+	<script type="text/javascript">
+		mui.init();
+		mui.plusReady(function() {
+			plus.navigator.setStatusBarBackground("#009BFD");
+			var self = plus.webview.currentWebview();
+			$('#title').html(self.title);
+			wflog(self);
+			var baiduWV = plus.webview.create('cmb_webview.html', "webdetail", {
+				top: '64px',
+				bottom: '0px',
+			}, {
+				actionUrl: self.actionUrl,
+				payJson: self.payJson
+			});
+
+			//https://www.bjoverrideurl.com/?type='1'&targert='product'&param='jsonstr'
+
+			baiduWV.overrideUrlLoading({
+				mode: 'reject',
+				match: '.*bjoverrideurl\.com/.*',
+			}, function(event) {
+				var obj = Bee.UrlUtils.urlToObj(event.url);
+				wflog(event);
+				wflog(obj);
+				onjsCallHtml(obj)
+			})
+
+			self.append(baiduWV);
+
+			document.getElementById("go_back").addEventListener("tap", function() {
+				baiduWV.canBack(function(event) {
+					var canBack = event.canBack;
+					if(canBack) {
+						baiduWV.back();
+					} else {
+						mui.back();
+					}
+				});
+			});
+
+			function close_web() {
+				mui.back();
+			}
+		});
+	</script>
+
+	<script type="text/javascript">
+		function onjsCallHtml(obj) {
+			if(obj.type == 1) { //原生
+				if(obj.target == 'cmbpay') {
+					pushToWebController('pay.result.success.html', '支付成功');
+				}
+			} else { //网页
+
+			}
+		}
+	</script>
+
+</html>

@@ -1,0 +1,61 @@
+.card-detail-content {
+	background-color: white;
+	display: flex;
+	display: -webkit-flex;
+	justify-content: space-between;
+	-webkit-justify-content: space-between;
+}
+
+.card-detail-left {
+	width: 44px;
+	background: #94D5EB;
+	text-align: center;
+	display: flex;
+	display: -webkit-flex;
+	justify-content: center;
+	-webkit-justify-content: center;
+	align-items: center;
+	-webkit-align-items: center;
+	min-height: 88px;
+	font-family: PingFang-SC-Regular;
+}
+
+.card-detail-right {
+	width: calc(100% - 44px - 1px);
+	width: -webkit-calc(100% - 1px);
+	margin-left: 1px;
+	background: #94D5EB;
+}
+
+.card-left-title {
+	text-align: center;
+	width: 16px;
+	color: white;
+	font-size: 16px;
+	line-height: 18px;
+}
+
+.mui-table-view-cell {
+	padding: 0;
+}
+
+.card-detail-right .mui-table-view-cell{
+	background-color: #94D5EB;
+}
+
+.card-left-content{
+	height: 44px;
+	display: flex;
+	display: -webkit-flex;
+	justify-content: space-between;
+	-webkit-justify-content: space-between;
+	align-items: center;
+	-webkit-align-items: center;
+	margin-right: 30px;
+	margin-left: 10px;
+}
+
+.mui-table-view-cell:after {
+    left: 0px;
+    height: 1px !important;
+}

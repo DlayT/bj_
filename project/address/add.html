@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title>添加地址</title>
+		<link rel="stylesheet" href="../../css/mui.picker.css" />
+		<link rel="stylesheet" href="../../css/min.css" />
+		<link rel="stylesheet" href="../../css/mui.min.css" />
+		<script type="text/javascript" src="../../js/lib/jquery.min.js"></script>
+	</head>
+	<style type="text/css">
+		.mui-bar {
+			background-color: orange;
+		}
+		
+		.mui-title {
+			color: #fff;
+		}
+		
+		.mui-icon-back:before,
+		.mui-icon,
+		.mui-icon-left-nav:before {
+			color: #fff;
+		}
+	</style>
+
+	<body>
+		<div class="mui-content">
+			<form class="mui-input-group" style="background: white;margin-top: 10px;">
+				<div class="mui-input-row">
+					<label>收货人：</label>
+					<input id="name" type="text" class="mui-input-clear" placeholder="请输入收货人姓名">
+				</div>
+				<div class="mui-input-row" style="background: white;">
+					<label>联系方式：</label>
+					<input id="phone" type="number" class="mui-input-clear" placeholder="请输入联系方式">
+				</div>
+				<div class="mui-input-row" style="background: white;">
+					<label>省市区：</label>
+					<input id="city_text" onfocus="this.blur()" type="text" placeholder="请选择收货地址">
+				</div>
+				<div class="mui-input-row" style="background: white;">
+					<label>街道：</label>
+					<input id="street" type="text" class="mui-input-clear" placeholder="请填写街道地址">
+				</div>
+
+				<div class="mui-button-row" style="margin-top: 15px;margin-bottom: 15px;">
+					<button id="btnSave" type="button" class="mui-btn mui-btn-primary">保        存</button>
+				</div>
+			</form>
+		</div>
+		<script src="../../js/lib/mui.min.js"></script>
+		<script src="../../js/lib/jquery-1.12.4.min.js"></script>
+		<script src="../../js/common/base.utils.js"></script>
+		<script src="../../js/lib/hao.js"></script>
+		<script type="text/javascript" src="../../js/lib/data.city.js"></script>
+		<script src="../../js/lib/mui.picker.min.js"></script>
+		<script type="text/javascript">
+			//选择省市区
+			var city_picker = new mui.PopPicker({
+				layer: 3
+			});
+			city_picker.setData(init_city_picker);
+			$("#city_text").on("tap", function() {
+				setTimeout(function() {
+					city_picker.show(function(items) {
+						$("#city_text").val((items[0] || {}).text + " " + (items[1] || {}).text + " " + (items[2] || {}).text);
+					});
+				}, 200);
+			});
+
+			hao.on('#btnSave', 'tap', function() {
+				var _name = $('#name').val();
+				if(!_name) {
+					mui.toast('请填写收货人姓名');
+					return false;
+				}
+				var _phone = $('#phone').val();
+				if(!_phone) {
+					mui.toast('请填写收货人电话');
+					return false;
+				}
+				if(!isMobile(_phone)){
+					mui.toast('请填写正确的电话号码');
+					return false;
+				}
+				var _city_text = $('#city_text').val();
+				if(!_city_text) {
+					mui.toast('请填写收货人地址');
+					return false;
+				}
+				var _street = $('#street').val();
+				if(!_street) {
+					mui.toast('请填写收货人街道地址');
+					return false;
+				}
+				var sql = 'insert into notepad values(NULL,"' + _name + '","' + _phone + '","' + _city_text + '","' + _street + '")';
+				hao.log(sql);
+				hao.t.query(db, sql, saveCallBack);
+			});
+			var db = hao.t.db();
+			var saveCallBack = function(data) {
+				console.log('回调');
+				mui.fire(plus.webview.getWebviewById('addresslist'), "buttonClick", {});
+				mui.back();
+			};
+		</script>
+	</body>
+
+</html>

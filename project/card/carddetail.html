@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>查看明细</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link rel="stylesheet" type="text/css" href="../../css/mui.min.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/base.app.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/card.detail.css" />
+		<style type="text/css">
+			.mui-table-view-cell:after {
+				background-color: #ffffff;
+			}
+			
+			.mui-navigate-right:after,
+			.mui-push-left:after,
+			.mui-push-right:after {
+				color: #fff;
+			}
+		</style>
+
+	</head>
+
+	<body>
+		<div class="mui-content" style="background-color:#F1F1F1;">
+			<div style="background-color:white;width:100%;height: 24px;">
+				<span id="cardIntro" style="float: right;font-size: 12px;color: #009BFD;margin-right: 8px;">此卡说明?</span>
+			</div>
+			<div id="venues">
+
+			</div>
+		</div>
+	</body>
+	<script src="../../js/lib/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../../js/lib/mui.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../../js/lib/template.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../../js/common/utils.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../../js/require.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../../js/default.config.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+		document.write('<script src="../../js/common/base.utils.js?v=' + Math.random() + '" type="text/javascript" charset="utf-8">' + '<' + '/script>');
+		document.write('<script src="../../js/common/request.js?v=' + Math.random() + '" type="text/javascript" charset="utf-8">' + '<' + '/script>');
+		document.write('<script src="../../js/app/card/carddetail.js?v=' + Math.random() + '" type="text/javascript" charset="utf-8">' + '<' + '/script>');
+	</script>
+		
+	<script type="text/html" id="tmp_venues">
+		{{each result v i}}
+		<ul class="mui-table-view">
+			<li class="mui-table-view-cell" style="background-color: '#94D5EB';margin-top: 8px;">
+				<div class="card-detail-content">
+					<div class="card-detail-left">
+						<div class="card-left-title">{{v.cate_name}}</div>
+					</div>
+					<div class="card-detail-right">
+						<ul class="mui-table-view">
+							{{each v.venueList venue j}}
+							<li class="mui-table-view-cell" style="" onclick="venueDetail({{venue}})">
+								<div class="card-left-content mui-navigate-right">
+									<div class="" style="font-size: 14px;color: white;">
+										{{venue.title}}
+									</div>
+									<div class="" style="font-size: 14px;color: white;">
+										查看
+									</div>
+								</div>
+							</li>
+							{{/each}}
+						</ul>
+					</div>
+				</div>
+			</li>
+		</ul>
+		{{/each}}
+
+	</script>
+
+</html>

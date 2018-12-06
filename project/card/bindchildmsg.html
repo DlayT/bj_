@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>身份信息绑定</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link rel="stylesheet" type="text/css" href="../../css/mui.min.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/base.app.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/mui.picker.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/bind.child.msg.css" />
+		<style type="text/css">
+			.mui-input-group .mui-input-row {
+				height: 44px;
+			}
+			
+			.mui-input-group label {
+				width: 25%;
+				padding: 11px 0px;
+			}
+			
+			.mui-input-group input {
+				font-size: 15px;
+				width: 70% !important;
+			}
+			
+			.mui-input-row .mui-input-clear~.mui-icon-clear,
+			.mui-input-row .mui-input-password~.mui-icon-eye,
+			.mui-input-row .mui-input-speech~.mui-icon-speech {
+				right: 30px;
+			}
+			
+			.mylable {
+				/*				background: mediumaquamarine;
+*/
+				text-align: center;
+			}
+			#uploadingAvatar {
+				position: relative;
+				cursor: pointer;
+				width: 40%;
+				overflow: hidden;
+				display: block;
+				float: left;
+				*display: inline;
+				*zoom: 1
+			}
+			
+			#uploadingAvatar input {
+				position: absolute;
+				right: 0;
+				top: 0;
+				opacity: 0;
+				filter: alpha(opacity=0);
+				cursor: pointer;
+				width: 100%;
+				height: 100%;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div class="mui-content mui-hidden mui-fullscreen">
+			<div style="background-color:black;width:100%;height: 24px;">
+				<span style="font-size: 12px;color: white;margin-left: 8px;">温馨提示：请输入18岁以下儿童姓名及身份证号码。</span>
+			</div>
+			<!--			<div class="app-seperate-view"></div> 这里导致没有置顶
+-->
+			<div class="" style="position: relative;text-align: center;">
+				<img src="../../img/bindcard_banner.png" />
+				<div class="card-bind-bannercontent">
+					<img id="childAvatar" src="../../img/user_default@2x.png" />
+
+					<div id="uploadingAvatar" style="border-bottom: #fff solid 1px; line-height: 20px;font-size: 16px;color: white;margin-top: 12px;">
+						点击上传图像
+						<input type="file" accept="image/*" capture="camera">
+					</div>
+
+					<div class="card-bind-tipinfo">
+						必须上传小朋友真实近期照片
+					</div>
+				</div>
+			</div>
+
+			<div class="app-seperate-view">
+
+			</div>
+			<form class="mui-input-group">
+				<div class="mui-input-row app-vertical-center">
+					<label class="mylable">姓&emsp;&emsp;名：</label>
+					<input name="childName" id="name" type="text" class="" placeholder="必须是儿童真实姓名">
+					<span style="color: red;margin-right: 16px;">*</span>
+				</div>
+				<div class="mui-input-row app-vertical-center">
+					<label class="mylable">身份证号：</label>
+					<input name="childIdno" id="idCard" type="text" class="" placeholder="必须是18岁以下的孩子">
+					<span style="color: red;margin-right: 16px;">*</span>
+				</div>
+				<div class="mui-input-row app-vertical-center">
+					<label class="mylable">学&emsp;&emsp;校：</label>
+					<input name="schoole_name" id="school" type="text" class="mui-input-clear">
+					<span style="color: red;margin-right: 16px;">*</span>
+				</div>
+				<div class="mui-input-row app-vertical-center">
+					<label class="mylable">班&emsp;&emsp;级：</label>
+					<input name="class_name" id="bjclass" type="text" class="mui-input-clear">
+					<span style="position: absolute;right: 15px;top: 15px;color: red;">*</span>
+				</div>
+				<div class="mui-input-row app-vertical-center">
+					<label class="mylable">手机号码1：</label>
+					<input name="wardenMobile" id="phonenum1" type="number" class="mui-input-clear">
+					<span style="color: red;margin-right: 16px;">*</span>
+				</div>
+
+				<div class="mui-input-row app-vertical-center">
+					<label class="mylable">手机号码2：</label>
+					<input name="warden_mobile_back" id="phonenum2" type="number" class="mui-input-clear">
+				</div>
+				<span class="" style="font-size: 12px;color: red;margin: 15px;">备注:*为必填选项</span>
+			</form>
+
+			<div id="bindBtn" class="app-footer-bluebar">
+				立即绑定
+			</div>
+		</div>
+			<!--<div id="picture" class="mui-popover mui-popover-action mui-popover-bottom">
+			<ul class="mui-table-view">
+				<li class="mui-table-view-cell">
+					<a class="a-upload" href="#">拍照
+						<input type="file" accept="image/*" capture="camera">
+					</a>
+				</li>
+				<li class="mui-table-view-cell">
+					<a class="a-upload" href="#">从手机相册选择
+						<input  type="file" accept="image/*">
+					</a>
+				</li>
+			</ul>
+			<ul class="mui-table-view">
+				<li class="mui-table-view-cell">
+					<a href="#picture"><b>取消</b></a>
+				</li>
+			</ul>
+		</div>-->
+	</body>
+
+	<script src="../../js/lib/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../../js/lib/mui.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../../js/lib/mui.picker.min.js"></script>
+	<script src="../../js/lib/template.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../../js/common/area.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../../js/common/utils.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../../js/require.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../../js/default.config.js" type="text/javascript" charset="utf-8"></script>
+	
+		<script type="text/javascript">
+			document.write('<script src="../../js/common/base.utils.js?v=' + Math.random() + '" type="text/javascript" charset="utf-8">' + '<' + '/script>');
+			document.write('<script src="../../js/common/request.js?v=' + Math.random() + '" type="text/javascript" charset="utf-8">' + '<' + '/script>');
+			document.write('<script src="../../js/app/card/bindchildmsg.js?v=' + Math.random() + '" type="text/javascript" charset="utf-8">' + '<' + '/script>');
+	</script>
+	
+	<script type="text/javascript">
+		//这一行代码的作用
+		(function($) {
+			$.init();
+			var result = document.getElementById('date');
+			var btns = $('.choice-dtae');
+			btns.each(function(i, btn) {
+				btn.addEventListener('tap', function() {
+					var _self = this;
+
+					var optionsJson = this.getAttribute('data-options') || '{}';
+					var options = JSON.parse(optionsJson);
+					var id = this.getAttribute('id');
+
+					_self.picker = new $.DtPicker(options);
+					_self.picker.show(function(rs) {
+
+						result.innerText = rs.text;
+
+						_self.picker.dispose();
+						_self.picker = null;
+					});
+
+				}, false);
+			});
+		})(mui);
+	</script>
+
+</html>

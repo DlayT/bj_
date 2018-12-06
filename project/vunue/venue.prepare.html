@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>场馆预约</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link rel="stylesheet" type="text/css" href="../../css/mui.min.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/mui.picker.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/base.app.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/home.index.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/myorder.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/venue.prepare.css" />
+
+		<style type="text/css">
+			.pay-content {
+				display: flex;
+				display: -webkit-flex;
+				flex-direction: row;
+				-webkit-flex-direction: row;
+				align-items: center;
+				-webkit-align-items: center;
+			}
+			.mui-btn{
+                padding: 0;
+                border: none;
+                border-radius: 0;
+            }
+		</style>
+	</head>
+
+	<body>
+	    <form action="" method="post" name="myFrom">
+            <input type="hidden" id="jsonRequestData" name="jsonRequestData" />
+            <!--<input type="submit" name="提交">-->
+        </form>
+		<div class="mui-content" style="display: none;">
+			<div id="hintMessage">
+				<span style="margin-left:15px; font-size: 12px;color: white;">
+					温馨提示:如果您没有买卡,则需要先买卡才能预约
+				</span>
+			</div>
+			<ul class="mui-table-view" id="orderinfo">
+				<li class="mui-table-view-cell mui-media">
+					<img id="venueImg" class="mui-media-object mui-pull-left" src="../../img/hdtp.png">
+
+					<div class="user-order-content">
+						<div class="mui-media-body">
+							<div id="venueName" class="mui-ellipsis user-order-title">场馆名称:</div>
+							<div id="marketPrice" class="mui-ellipsis user-order-orderno">门市价:</div>
+						</div>
+
+						<div class="mui-media-body">
+							<div class="user-student-info">
+								<div class="user-order-people">
+									<span> 学生人数：</span>
+								</div>
+								<div class="user-order-people" style="min-width: 80px;text-align: center;">1</div>
+								<div class="user-order-people" style="min-width: 60px;text-align: center;">
+									<span style="color:#FC1520 ;" id="student_price">免费</span>
+								</div>
+							</div>
+
+							<div class="user-order-accompany">
+								<div class="user-order-people" style="">陪同人数：</div>
+
+								<div style="width:80px; height: 20px;" class="mui-numbox" data-numbox-step='1' data-numbox-min='1' data-numbox-max='99'>
+									<button class="mui-btn mui-numbox-btn-minus" type="button">-</button>
+									<input id="adult_num" class="mui-numbox-input" type="number" disabled="disabled" style="font-size: 12px;line-height: 20px;" />
+									<button class="mui-btn mui-numbox-btn-plus" type="button">+</button>
+								</div>
+
+								<div class="user-order-people" style="min-width:60px;text-align: center;">
+									<span id="wufangPrice" style="color:#FC1520 ;">￥10元 </span>
+								</div>
+							</div>
+						</div>
+					</div>
+
+				</li>
+			</ul>
+			<div class="app-seperate-view" style="height: 1px;background-color: #c8c7cc;"></div>
+			<div id="choiceCalendar" class="date-box">
+				<div class="choice-date-box">
+					<span style="margin-left: 21px;">请选择预定日期：</span>
+					<span style="flex: 1;display: none;" id="date"></span>
+					<img src="../../img/icon_date.png" />
+				</div>
+			</div>
+			<div class="app-seperate-view"></div>
+
+			<div id="hotplaceheader" class="app-header-view mui-table-view-cell mui-media">
+				<div class="venue-tip-info">
+					<img class="home-header-lefticon mui-media-object mui-pull-left" src="../../img/venue_prepare_cardicon@2x.png" />
+					<div class="mui-media-object app-header-title mui-pull-left" style="color: #009BFD;font-size: 16px;">
+						选择包含此场馆的卡
+					</div>
+				</div>
+			</div>
+			<div id="related_card">
+				<ul class="mui-table-view mui-table-view-radio" id="related_card_table">
+				</ul>
+			</div>
+			<div class="app-seperate-view"></div>
+
+			<div class="pay-way-header">
+				<img src="../../img/icon_pay_choice.png" />
+				<span>支付方式</span>
+			</div>
+			<div class="app-line-separate-view"></div>
+
+			<ul id="payTypes" class="mui-table-view" style="padding-bottom: 100px;">
+				<li class="mui-table-view-cell mui-radio mui-right" id="wxpay">
+					<div class="pay-content">
+						<img style="width: 36px;height: 36px;" src="../../img/pay_weixin@2x.png" />
+						<input name="radio" type="radio" style="top: 20px;" checked="true">
+						<p style="margin-left: 22px;">微信支付</p>
+					</div>
+				</li>
+				<!--<li class="mui-table-view-cell mui-radio mui-right" style="font-size: 14px; border-bottom:.5px solid #C8C7CC;" id="alipay">
+					<div class="pay-content">
+						<img style="width: 36px;height: 36px;" src="../../img/pay_zhifubao@2x.png" />
+						<input name="radio" type="radio" style="top: 20px;">
+						<p style="margin-left: 22px;">支付宝支付</p>
+					</div>
+				</li>-->
+				<li class="mui-table-view-cell mui-radio mui-right" style="font-size: 14px; border-bottom:.5px solid #C8C7CC;" id="cmbpay">
+					<div class="pay-content">
+						<img style="width: 36px;height: 36px;" src="../../img/zhaohang@2x.png" />
+						<input name="radio" type="radio" style="top: 20px;">
+						<p style="margin-left: 22px;">一网通支付</p>
+					</div>
+				</li>
+			</ul>
+
+			<div class="price app-footer-whitebar">
+				<div class="price_left">
+					<span style="color: black;" id="cardPrice">预约总价：</span>
+					<span id="pricetotal">¥0元</span>
+				</div>
+				<div id="payBtn" data-loading-text="预约中" class="price_left1 mui-btn">立即预约</div>
+			</div>
+			<form action="http://121.15.180.66:801/netpayment/BaseHttp.dll?MB_EUserPay" method="post" name="cmbpayform">
+				<input type="hidden" id="jsonRequestData" name="jsonRequestData" />
+			</form>
+		</div>
+	</body>
+
+	<script src="../../js/lib/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../../js/lib/mui.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../../js/lib/mui.picker.min.js" type="text/javascript" charset="UTF-8"></script>
+	<script src="../../js/lib/template.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../../js/common/utils.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../../js/require.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../../js/default.config.js" type="text/javascript" charset="utf-8"></script>
+
+	<script type="text/javascript">
+		document.write('<script src="../../js/common/base.utils.js?v=' + Math.random() + '" type="text/javascript" charset="utf-8">' + '<' + '/script>');
+		document.write('<script src="../../js/common/request.js?v=' + Math.random() + '" type="text/javascript" charset="utf-8">' + '<' + '/script>');
+		document.write('<script src="../../js/app/venue/venue.prepare.js?v=' + Math.random() + '" type="text/javascript" charset="utf-8">' + '<' + '/script>');
+	</script>
+
+	<script type="text/html" id="tmp_related_card_table">
+		{{each result v i}} {{if v.selected}}
+		<li class="mui-table-view-cell mui-media mui-selected" id="{{v}}">
+			<div class="mui-navigate-right ">
+				<div class="mui-media-object mui-pull-left " style="position: relative; width: 98px;height: 60px; ">
+					<img class="venue-card-img" is_buy={{v.is_buy }} id={{v.id}} src={{v.thumb}}>
+					<!--{{if v.is_buy == 1}}
+					<img src="../../img/card_buyed@2x.png " / style="position:absolute ;width: 33px;height: 28px;top: 0;left: 0;padding: 0; "> 
+					{{else}}
+					<img src="../../img/card_unbuy@2x.png " / style="position:absolute ;width: 33px;height: 28px;top: 0;left: 0;padding: 0; ">
+					{{/if}}-->
+				</div>
+				<div class="venue-card-list">
+					<div class="mui-ellipsis venue-card-title">
+						{{v.name}}
+					</div>
+					<div class="mui-ellipsis venue-card-intro">
+						{{v.instr}}
+					</div>
+					{{if v.is_buy==1}}
+					<div class="">
+						<span style="font-size: 10px;color: white;border-radius: 5px;background-color: #009BFD;padding: 2px 8px;">已买</span>
+					</div>
+					{{else}}
+					<div class="">
+						<span style="font-size: 10px;color: white;border-radius: 5px;background-color: #009BFD;padding: 2px 8px;">未买</span>
+					</div>
+					{{/if}}
+				</div>
+			</div>
+		</li>
+		{{else}}
+		<li class="mui-table-view-cell mui-media" id="{{v}}">
+			<div class="mui-navigate-right ">
+				<div class="mui-media-object mui-pull-left " style="position: relative; width: 98px;height: 60px; ">
+					<img class="venue-card-img" is_buy={{v.is_buy}} id={{v.id}} src={{v.thumb}}>
+					<!--{{if v.is_buy == 1}}
+					<img src="../../img/card_buyed@2x.png " / style="position:absolute ;width: 33px;height: 28px;top: 0;left: 0;padding: 0; "> 
+					{{else}}
+					<img src="../../img/card_unbuy@2x.png " / style="position:absolute ;width: 33px;height: 28px;top: 0;left: 0;padding: 0; "> 
+					{{/if}}-->
+				</div>
+				<div class="venue-card-list ">
+					<div class="mui-ellipsis venue-card-title ">
+						{{v.name}}
+					</div>
+					<div class="mui-ellipsis venue-card-intro ">
+						{{v.instr}}
+					</div>
+					{{if v.is_buy==1}}
+					<div class="">
+						<span style="font-size: 10px;color: white;border-radius: 5px;background-color: #009BFD;padding: 2px 8px;">已买</span>
+					</div>
+					{{else}}
+					<div class="">
+						<span style="font-size: 10px;color: white;border-radius: 5px;background-color: #009BFD;padding: 2px 8px;">未买</span>
+					</div>
+					{{/if}}
+				</div>
+			</div>
+		</li>
+		{{/if}} {{/each}}
+	</script>
+
+	<script type="text/html" id="tmp_orderinfo">
+		{{set venue = result}}
+		<li class="mui-table-view-cell mui-media" id="{{v}}">
+			<img class="mui-media-object mui-pull-left" src={{venue.thumb}}>
+			<div class="user-order-content">
+				<div class="mui-media-body">
+					<div class="mui-ellipsis user-order-title">{{venue.name}}</div>
+					<div class="mui-ellipsis user-order-orderno">门市价：￥{{venue.original_price}}</div>
+				</div>
+
+				<div class="mui-media-body">
+					<div class="user-student-info">
+						<div class="user-order-people" style="">
+							<span> 学生人数：</span>
+						</div>
+						<div class="user-order-people" style="min-width: 80px;text-align: center;">1</div>
+						<div class="user-order-people" style="min-width: 60px;text-align: center;">
+							<span style="color:#FC1520 ;" id="student_price">免费</span>
+						</div>
+					</div>
+
+					<div class="user-order-accompany">
+						<div class="user-order-people" style="">
+							陪同人数：
+						</div>
+
+						<div class="mui-numbox user-order-people" style="width:80px; height: 20px;" data-numbox-min='1' data-numbox-max='9'>
+							<button class="mui-btn mui-btn-numbox-minus" type="button" onclick="subAccompanyPeople()" style="line-height: 20px;">-</button>
+							<input disabled="disabled" id="numbox_input" class="mui-input-numbox" type="number" value="0" style="font-size: 12px;line-height: 20px; data-price=" 100 " data-value="0 " />
+							<button class="mui-btn mui-btn-numbox-plus " type="button " onclick="addAccompanyPeople() " style=" ">+</button>
+						</div>
+						
+						<div class="user-order-people " style="min-width:60px;text-align: center; ">
+							<span style="color:#FC1520 ; ">￥{{venue.price}}元 </span>
+						</div>
+					</div>
+				</div>
+			</div>
+		</li>
+	</script>
+	
+</html>

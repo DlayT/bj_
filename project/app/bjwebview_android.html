@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link rel="stylesheet" type="text/css" href="../../css/mui.min.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/base.app.css" />
+
+		<style type="text/css">
+			a {
+				text-decoration: none;
+				color: #FFFFFF;
+			}
+		</style>
+
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav app-navbar-config" style="height: 64px;">
+			<div class="app-status-config"></div>
+			<div>
+				<h1 id="title" class="mui-title">详情</h1>
+				<a class="mui-icon mui-icon-left-nav mui-pull-left" id="go_back"></a>
+				<div id="titl" class="mui-icon  mui-pull-left mui-action-back" id="go_back" style="font-size: 16px;line-height: 44px;padding-top: 1px;padding-bottom: 0px;padding-left:15px; color: white;
+				" id="close_page"> 关闭
+				</div>
+			</div>
+		</header>
+		<div class="mui-content">
+
+		</div>
+	</body>
+
+	<!--脚本文件改变 尽量放在底部 异步加载的问题-->
+
+	<script src="../../js/lib/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../../js/lib/mui.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../../js/common/utils.min.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			document.write('<script src="../../js/common/base.utils.js?v=' + Math.random() + '" type="text/javascript" charset="utf-8">' + '<' + '/script>');
+			document.write('<script src="../../js/common/request.js?v=' + Math.random() + '" type="text/javascript" charset="utf-8">' + '<' + '/script>');
+	</script>
+	
+	<!--模板-->
+	<script type="text/javascript">
+		mui.init();
+		mui.plusReady(function() {
+			var self = plus.webview.currentWebview();
+			$('#title').html(self.title);
+			console.log(self.weburl);
+			var baiduWV = plus.webview.create(self.weburl, "webdetail", {
+				//var baiduWV = plus.webview.create('http://192.168.0.130/test/index.html', "webdetail", {
+				top: '64px',
+			});
+
+			baiduWV.overrideUrlLoading({
+				mode: 'reject',
+				match: '.*baidu\.com/.*',
+			}, function(event) {
+				wflog(event);
+			})
+
+			self.append(baiduWV);
+			/**
+			 * 重写mui.back()方法
+			 * http://dev.dcloud.net.cn/mui/window/#closewindow
+			 */
+			/**
+			 * 监听子窗口对象是否可后退
+			 * http://www.html5plus.org/doc/zh_cn/webview.html#plus.webview.WebviewObject.canBack
+			 */
+			document.getElementById("go_back").addEventListener("tap", function() {
+				baiduWV.canBack(function(event) {
+					var canBack = event.canBack;
+					if(canBack) {
+						baiduWV.back();
+					} else {
+						mui.back();
+						//alert("到头了，不能后退了！");
+					}
+				});
+			});
+
+			// 右上角前进icon的事件
+			//			document.getElementById("go_forward").addEventListener("tap", function() {
+			//				/**
+			//				 * 监听子窗口对象是否可前进
+			//				 * http://www.html5plus.org/doc/zh_cn/webview.html#plus.webview.WebviewObject.canForward
+			//				 */
+			//				baiduWV.canForward(function(event) {
+			//					var canForward = event.canForward;
+			//					if(canForward) {
+			//						baiduWV.forward();
+			//					} else {
+			//						alert("不能前进！");
+			//					}
+			//				});
+			//			});
+		});
+	</script>
+
+	<script type="text/javascript">
+		function onhtmlCalljavaScript(param) {
+			wflog(param);
+		}
+	</script>
+
+</html>

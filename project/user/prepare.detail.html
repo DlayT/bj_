@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>预约详情</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link rel="stylesheet" type="text/css" href="../../css/mui.min.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/base.app.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/myorder.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/prepare.detail.css" />
+		<style type="text/css">
+			.mui-popover-arrow {
+				display: none;
+			}
+			
+			.check_status-box {
+				display: flex;
+				display: -webkit-flex;
+				flex-direction: row;
+				-webkit-flex-direction: row;
+				justify-content: space-between;
+				-webkit-justify-content: space-between;
+			}
+			
+			.pay-adult-box {
+				display: flex;
+				display: -webkit-flex;
+				width: 100%;
+				height: 45px;
+				align-items: center;
+				-webkit-align-items: center;
+			}
+			
+			.buy-accompany-ticket {
+				display: flex;
+				display: -webkit-flex;
+				justify-content: space-between;
+				-webkit-justify-content: space-between;
+				align-items: center;
+				-webkit-align-items: center;
+				/*				background: mediumaquamarine;
+*/
+				width: 100%;
+				height: 60px;
+				border-top: .8px solid #c8c7cc;
+			}
+			
+			.buy-accompany-price {
+				/*				background: red;
+*/
+				margin-left: 15px;
+				/*				font-size: 14px;
+*/
+			}
+			/*子窗口樣式*/
+			
+			iframe {
+				width: 280px;
+				height: 460px;
+				background: rgba(0, 0, 0, 0.3);
+				border: 1px solid #ccc;
+				position: absolute;
+				top: 20%;
+				left: 50%;
+				margin-left: -140px;
+			}
+		</style>
+
+	</head>
+
+	<body>
+		<div class="mui-content mui-hidden">
+			<ul class="mui-table-view" id="orderinfo">
+				<li class="mui-table-view-cell mui-media">
+					<img id="venueImg" class="mui-media-object mui-pull-left">
+
+					<div class="user-order-content">
+						<div class="mui-media-body">
+							<div id="venueName" class="mui-ellipsis user-order-title"></div>
+							<div id="venueCode" class="mui-ellipsis user-order-orderno">订单号：</div>
+							<div id="venueDate" class="mui-ellipsis user-order-orderno">预约日期:</div>
+						</div>
+
+						<div class="check_status-box">
+							<div id="personNum" class="user-order-people">陪同人数：</div>
+						</div>
+					</div>
+
+					<img id="checkStatus" src="../../img/venue.checked.png" style="width:52px;height: 57px;margin-bottom: 12px;position: absolute;bottom: 0;right: 0px;visibility: hidden;" />
+				</li>
+			</ul>
+
+			<ul class="mui-table-view" id="venue">
+				<li class="mui-table-view-cell">
+					<div id="venueName2" class=""></div>
+					<div class=""></div>
+					<button id="floatWebview" type="button" class="mui-btn mui-btn-blue">扫码进馆</button>
+				</li>
+				<li class="mui-table-view-cell" style="display: none;">
+					<div id="venueName3" class=""></div>
+					<div class=""></div>
+					<button id="yanpiao" type="button" class="mui-btn mui-btn-blue">手动验票</button>
+				</li>
+				<li style="display: none;" id="payAdultCell">
+					<div style="display: flex;flex-direction: column;align-items: flex-end;">
+						<div class="pay-adult-box">
+							<span style="flex: 1;margin-left: 15px;">陪同人员票</span>
+							<div style="min-width:80px; max-height: 26px;" class="mui-numbox" data-numbox-step='1' data-numbox-min='1' data-numbox-max='9'>
+								<button class="mui-btn mui-numbox-btn-minus" type="button">-</button>
+								<input id="adult_num" class="mui-numbox-input" type="number" disabled="disabled" />
+								<button class="mui-btn mui-numbox-btn-plus" type="button">+</button>
+							</div>
+							<span id="adultTotal" style="margin-right: 15px;margin-left: 10px;color: red;">价格:0元</span>
+						</div>
+
+						<div class="buy-accompany-ticket">
+							<div class="buy-accompany-price">
+								<div class="buy-accompany-mktprice">
+									市场价:
+								</div>
+								<div class="buy-accompany-bjprice">
+									百纪价:
+								</div>
+							</div>
+							<button style="width: 82px;margin-right: 15px;" id="payAdult" type="button" data-loading-text="购买中" class="mui-btn mui-btn-blue">确认购买</button>
+						</div>
+
+					</div>
+
+				</li>
+			</ul>
+			<div id="popover" class="mui-popover">
+				<img src="../../img/icon_e_mail.png" />
+			</div>
+		</div>
+
+	</body>
+
+	<!--脚本文件改变 尽量放在底部 异步加载的问题-->
+
+    <script src="../../js/lib/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../js/lib/mui.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../js/lib/template.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../js/common/utils.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../js/require.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../js/default.config.js" type="text/javascript" charset="utf-8"></script>
+    
+	<script type="text/javascript">
+			document.write('<script src="../../js/common/base.utils.js?v=' + Math.random() + '" type="text/javascript" charset="utf-8">' + '<' + '/script>');
+			document.write('<script src="../../js/common/request.js?v=' + Math.random() + '" type="text/javascript" charset="utf-8">' + '<' + '/script>');
+			document.write('<script src="../../js/app/user/prepare.detail.js?v=' + Math.random() + '" type="text/javascript" charset="utf-8">' + '<' + '/script>');
+	</script>
+
+	<script>
+		//		mui.plusReady(function() {
+		(function() {
+			// 创建悬浮窗口
+			var floatw = null;
+			var web = JSON.parse(sessionStorage.getItem('order_msg'));
+			//			var web = plus.webview.currentWebview();
+			//			console.log(web);
+			//			return false;
+			$("#yanpiao").on('click', function() {
+				if(checkStatus == 1) {
+					mui.toast('已验票');
+					return;
+				}
+				if(floatw) { // 避免快速多次点击创建多个窗口
+					return;
+				}
+				//				floatw = plus.webview.create("prepare.qrcode.html", "webview_float.html", {
+				//					width: '280px',
+				//					height: '250px',
+				//					margin: "auto",
+				//					background: "rgba(0,0,0,0.3)",
+				//					scrollIndicator: 'none',
+				//					scalable: false,
+				//					popGesture: 'none'
+				//				}, {
+				//					order_id: web.order_id,
+				//					type: 1
+				//				});
+				//
+				//				floatw.addEventListener("loaded", function() {
+				//					floatw.show('fade-in', 300);
+				//					floatw = null;
+				//				}, false);
+				var floatw = document.createElement('iframe');
+				floatw.src = bj_webpath + '/user/prepare.qrcode.html';
+				if (web.order_type == 3) {
+                    var piao = {
+                        order_id: web.order_id,
+                        type: 0,
+                        childname: childobj.child_name,
+                        childage: childobj.child_age,
+                        childgender: childobj.child_gender,
+                        childavatar: childobj.child_avatar,
+                        wardenmobile: childobj.warden_mobile,
+                        order_type: web.order_type
+                    };
+                } else {
+                    var piao = {
+                        order_id: web.order_id,
+                        type: 0,
+                        order_type: web.order_type
+                    };
+                }
+				//注冊session 驗票信息
+				sessionStorage.setItem('piao', JSON.stringify(piao));
+				document.body.appendChild(floatw);
+			});
+
+			$("#floatWebview").on('click', function() {
+				if(checkStatus == 1) {
+					mui.toast('已验票');
+					return;
+				}
+				if(floatw) { // 避免快速多次点击创建多个窗口
+					return;
+				}
+
+				//验票的弹框
+
+				//				floatw = plus.webview.create("prepare.qrcode.html", "webview_float.html", {
+				//					width: '280px',
+				//					height: '460px',
+				//					margin: "auto",
+				//					background: "rgba(0,0,0,0.3)",
+				//					scrollIndicator: 'none',
+				//					scalable: false,
+				//					popGesture: 'none'
+				//				}, {
+				//					
+				//					order_id: web.order_id,
+				//					type: 0,
+				//					childname: childobj.child_name,
+				//					childage: childobj.child_age,
+				//					childgender: childobj.child_gender,
+				//					childavatar: childobj.child_avatar,
+				//					wardenmobile: childobj.warden_mobile
+				//				});
+				var floatw = document.createElement('iframe');
+				floatw.src = bj_webpath + '/user/prepare.qrcode.html?v=' + Math.random();
+				floatw.id="iframes";
+				if (web.order_type == 3) {
+                    var piao = {
+                        order_id: web.order_id,
+                        type: 0,
+                        childname: childobj.child_name,
+                        childage: childobj.child_age,
+                        childgender: childobj.child_gender,
+                        childavatar: childobj.child_avatar,
+                        wardenmobile: childobj.warden_mobile,
+                        order_type: web.order_type
+                    };
+                } else {
+                    var piao = {
+                        order_id: web.order_id,
+                        type: 0,
+                        order_type: web.order_type
+                    };
+                }
+				//注冊session 驗票信息
+				sessionStorage.setItem('piao', JSON.stringify(piao));
+				document.body.appendChild(floatw);
+
+				//				floatw.addEventListener("loaded", function() {
+				//					alert(111111);
+				//					floatw.show('fade-in', 300);
+				//					floatw = null;
+				//				}, false);
+			});
+		})();
+		function closeIframe(){
+		    var iframeEl = document.getElementsByTagName('iframe')[0];
+		    iframeEl.parentNode.removeChild(iframeEl);
+		}
+	</script>
+
+</html>

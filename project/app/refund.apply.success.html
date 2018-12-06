@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link rel="stylesheet" type="text/css" href="../../css/mui.min.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/base.app.css" />
+
+		<style type="text/css">
+			.app_empty_view {
+				display: flex;
+				display: -webkit-flex;
+				flex-direction: column;
+				-webkit-flex-direction: column;
+				align-items: center;
+				justify-content: center;
+				-webkit-align-items: center;
+				-webkit-justify-content: center;
+			}
+			
+			.app_empty_view img {
+				margin-top: -120px;
+				width: 54px;
+				height: 54px;
+			}
+			
+			.app_empty_tittle {
+				margin-top: 5px;
+				font-size: 16px;
+			}
+			
+			.app_empty_subtitle {
+				margin-top: 5px;
+				font-size: 12px;
+			}
+			
+			.mui-btn {
+				margin-top: 10px;
+				padding: 10px 85px;
+			}
+		</style>
+
+	</head>
+
+	<body>
+		<div class="mui-content mui-fullscreen app_empty_view">
+			<img src="../../img/pay_success.png" />
+			<div class="app_empty_tittle">
+				退款申请成功
+			</div>
+			<div class="app_empty_subtitle">
+				百纪承诺7个工作日内完成审核并退款
+			</div>
+			<button id="returnOrder" type="button" class="mui-btn mui-btn-blue">返回订单</button>
+		</div>
+	</body>
+
+	<script src="../../js/lib/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../../js/lib/mui.min.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript">
+		document.write('<script src="../../js/common/base.utils.js?v=' + Math.random() + '" type="text/javascript" charset="utf-8">' + '<' + '/script>');
+		document.write('<script src="../../js/common/request.js?v=' + Math.random() + '" type="text/javascript" charset="utf-8">' + '<' + '/script>');
+	</script>
+	<script type="text/javascript">
+		$('#returnOrder').on('tap', function(event) {
+			//			var list = plus.webview.getWebviewById('myVenueOrder.html');
+			//			mui.fire(list, 'refundsuccesssignal');
+			//			backToPage('myVenueOrder.html');
+			location.replace( bj_webpath + "/order/myVenueOrder.html");
+
+		});
+
+		$(function() {
+			pushHistory();
+			window.addEventListener("popstate", function(e) {
+				location.href = bj_webpath + "/order/myVenueOrder.html";
+			}, false);
+
+			function pushHistory() {
+				var state = {
+					title: "title",
+					url: "#"
+				};
+				window.history.pushState(state, "title", "#");
+			}
+		});
+	</script>
+
+</html>
